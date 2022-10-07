@@ -1,0 +1,38 @@
+.ball{
+    width : 70px;
+    height : 70px;
+    background-color : pink;
+    border-radius : 50%;
+
+    position: relative;
+
+    /* animation 연결 */
+    animation-name : moveball;
+    animation-duration : 3s;
+    animation-timing-function : linear;
+    animation-iteration-count : 6;
+
+}
+
+@keyframes moveball{
+    0%{
+        left : 0px;
+        top : 0px;
+    }
+    25%{
+        left : 300px;
+        top : 0px;
+    }
+    50%{
+        left: 300px;
+        top : 300px;
+    }
+    75%{
+        left : 0px;
+        top : 300px;
+    }
+    100%{
+        left : 0px;
+        top : 0px;
+    }
+}

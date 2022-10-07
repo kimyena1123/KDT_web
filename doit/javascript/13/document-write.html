@@ -1,0 +1,21 @@
+<!DOCTYPE>
+<html lang = "ko">ㄴ
+    <head>
+        <meta charset = "UTF-8">
+        <title>화면에 출력을 담당하는 document.write()문</title>
+    </head>
+    <body>
+        <script>
+            //document.write() : 괄호 따옴표 사이에 HTML 태그도 함께 사용가능하다.
+            document.write("<h1>어서오세요.</h1>");
+
+            //변수를 섞에서 나타낼 수도 있다. +연산자를 사용해 연결해준다.
+            //+연산자는 더하기 기호가 아니라 "연결 연산자"이다.
+            //내용과 변수를 연결해주는 역할을 한다.
+
+            var name = prompt("이름을 입력하세요."); //입력창
+            
+            document.write("<b><big>" + name + "</big></b>님, 환영합니다.");
+        </script>
+    </body>
+</html>김

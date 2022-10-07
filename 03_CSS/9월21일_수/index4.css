@@ -1,0 +1,170 @@
+/* 
+    단일 선택자
+    -전체 : *
+    -태그 : 태그명
+    -클래스 : .클래스명
+    -아이디 : #아이디명
+ */
+ 
+/* *{
+    color : #220258;
+}
+
+li{
+    color : #ff0000;
+}
+
+.orange{
+    color : orange;
+}
+
+div.orange{
+    color : green;
+}
+
+#orange{
+    color : #0000ff;
+} */
+
+/* 여러 선택자를 동시에 지정
+    -, 를 이용해 여러 선택자에 동시 스타일 지정 */
+
+/* ul, p, .orange{
+    color :Green;
+} */
+
+
+
+/* 복합 형제 선택자
+    -하위 : A B
+    -자식 : A > B
+    -인접형제 : A + B
+    -일반형제 : A ~ B
+ */
+
+/* 하위 선택자 
+    : 부모 요소에 포함된 하위 요소를 모두 선택
+    : 상위 요소와 하위 요소를 공백으로 구분
+ */
+ body .orange{
+    color : orange;
+ }
+
+ /* 자식 선택자
+    : 자식 요소에 스타일을 적용하는 선택자
+    : 두 요소 사이에 >를 표시해 부모요소와 자식요소를 구분함.
+ */
+ul > .red{
+    color : blue;
+}
+
+
+ /* 인접 형제 선택자 
+    : 가장 가까운 형제요소에 스타일 적용함
+    : 같은 부모를 가진 형제 요소 중 첫번째 동생요소에게만 적용
+    : + 로 구분
+    : 조건1 => A, B 같은 레벨
+    : 조건2 => B가 A의 바로 뒤에
+ */
+ul + .orange{
+    color : red;
+}
+
+ul + span.orange{
+    color: green;
+}
+
+
+ /* 형제선택자
+    : 인접형제선택자와 달리 모든 형제 요소에 스타일이 적용.
+    : 조건1 => A, B는 같은 레벨
+    : 조건2 => B는 A보다 뒤에 위치
+ */
+div.orange ~ span{
+    color : royalblue;
+}
+
+div.orange ~ ul{
+    color : royalblue;
+}
+
+/*가상 선택자*/
+
+#google:hover{
+    font-weight : 700;
+    color : orangered;
+}
+#naver:active{
+    font-weight : 700;
+    color : palevioletred;
+}
+#daum:visited{
+    color : gray;
+}
+
+/* .fruits span:first-child{
+    color : red;
+}
+
+.fruits p:first-child{/*p태그가 fruits의 첫번째 자식이 아니므로 적용X
+    color : red;
+}
+.fruits h3:last-child{
+    color : Red;
+}
+.fruits *:nth-child(2n){
+    color : green;
+}
+.fruits *:nth-child(2n-1){
+    color : green;
+}
+*/
+
+.fruits *:not(span){
+    color : blue;
+}
+
+/* .numbers span:nth-child(odd){
+    color : green;
+}
+.numbers span:nth-child(even){
+    color : orange;
+} */
+
+.numbers span{
+    font-weight : 700;
+}
+.numbers span:nth-child(3n+4){
+    color : blue;
+}
+
+/*CSS 우선순위*/
+.test{
+    font-size : 24px;
+    font-weight : 700;
+}
+.test *{
+    color : gray;
+}
+/*태그 선택자*/ /*태그 선택자 > 전체 선캑자*/
+.test span{
+    color : blue !important;       /* !important가 다 이김 */
+}
+
+/*클래스 선택자*/
+.test .num{ /*클래스 선택자 > 태그 선택자*/
+    color : green;
+}
+
+/*아이디 선택자*/
+.test #two{ /*아이디 선택자 > 클래스 선택자*/
+    color : purple;
+}
+
+/*인라인 스타일*/
+/* 안리인 스타일 > 아이디 선택자 */
+
+/*
+    결론
+        !important > 인라인 스타일 > 아이디 선택자 > 클래스/속성/가상 선택자 > 태그 선택자 > 전체 선택자
+*/

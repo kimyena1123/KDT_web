@@ -1,0 +1,16 @@
+#wrapper{
+    display : grid;
+    grid-template-columns: repeat(3, 200px);/*너비 200px인 칼럼3개*/
+    grid-template-rows: minmax(100px, auto);
+    grid-gap : 20px 30px; /*줄 간격 20px, 칼럼 간격 30px,*/
+
+    /* grid-column-gap: 30px;
+    grid-row-gap: 20px; */
+}
+.items{
+    padding : 15px;
+    background-color : #eee;
+}
+.items:nth-child(odd){
+    background-color : #bbb;
+}

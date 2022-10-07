@@ -1,0 +1,43 @@
+#container{
+    width : 1200px;
+    height : 300px;
+    background-color : aliceblue;
+}
+.beach{
+    width : 200px;
+    height : 150px;
+}
+
+.beach #beach1 img{
+    width : 200px;
+    height : 150px;
+
+    position : absolute;
+    top : 100px;
+    left : 100px;
+
+    transform : skewY(15deg);
+    z-index : 5;
+}
+.beach #beach2 img{
+    width : 200px;
+    height : 150px;
+
+    position : absolute;
+    top : 100px;
+    left : 190px;
+
+    transform : skewY(15deg);
+    z-index : 4;
+}
+.beach #beach3 img{
+    width : 200px;
+    height : 150px;
+
+    position : absolute;
+    top : 100px;
+    left : 300px;
+
+    transform : skewY(15deg);
+    z-index : 3;
+}

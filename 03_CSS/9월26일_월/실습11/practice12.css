@@ -1,0 +1,21 @@
+
+p{
+    width: 1550;
+    position : relative;
+
+    animation-name: leftmove;
+    animation-duration : 3s;
+    animation-timing-function : linear;
+}
+
+@keyframes leftmove{
+    from{
+        left : 1550px;
+        width : 3000px;
+        
+    }
+    to{
+        left : 0px;
+        width : 1550px;
+    }
+}

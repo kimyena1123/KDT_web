@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS DOM - 이벤트</title>
+	<style>
+		div {
+			background-color: pink;
+		}
+        .append-p{
+            color : red;
+            background-color : skyblue;
+        }
+	</style>
+</head>
+<body>
+	<h1 class="title">JS DOM - 이벤트</h1>
+	<div id="div1">여기는 <b>first</b> div 입니다.</div>
+
+    <!-- 
+        onclick : 요소에 클릭이 발생했을 때 실행할 js 코드
+     -->
+    <button onclick = "addNode();">추가</button>
+    <button onclick = "removeNode();">삭제</button>
+
+    <hr>
+
+    <ul class = "fruits"></ul>
+	
+    <div class = "container"></div>
+
+	<script src="DOM2.js"></script>
+</body>
+</html>

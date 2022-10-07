@@ -1,0 +1,136 @@
+<!DOCTYPE>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <title>bootstrap</title>
+
+        <style>
+            body{
+                padding-bottom : 1000px;
+            }
+        </style>
+        <!--CDN Link (css)-->
+        <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <h5>반응형 웹
+            : 다양한 기기의 화며에 따라 유동적으로 디스플레이가 변환되는 페이지
+            ex. bootstrap 사이트
+
+            vs. 적응형 웹
+            -기기의 종류에 따라 그에 맞는 템플릿을 제공
+            ex. 네이버(pc용 화면 www.naver/com / 모바일용 화면 m.naver.com)
+        </h5>
+        <h2>레이아웃</h2>
+
+	<!-- container
+		- 가장 기본적인 레이아웃 요소
+		- grid system에 사용됨
+	-->
+	<h2 class="text-center">container</h2>
+	<div class="container bg-danger">container</div>
+	<div class="container-fuild bg-primary mt-1">container-fuilid</div>
+
+	<!-- 
+		grid
+		: bootstrap의 레이아웃 크기를 유동적으로 변하게 해주는 기능
+		.container -> .row -> .col 순으로 사용 권장
+		- col: 각 중단점에 대해서 col 클래스 개수 만큼 모든 열의 너비를 동일하게 차지
+		- col-{size}: 12개의 컬럼을 12/{size} 크기를 갖고, 12/{size}개로 나눠서 차지
+			ex. col-4: 12/4 (3) 크기로 3개 차지
+		=> 브라우저 크기에 맞게 레이아웃 구성 쉽게 가능해짐 
+
+		Tip!! 요소의 크기, 여백 파악이 어렵다. => 배갱색상 넣기!! (background-color, bg-{color})
+	 -->
+	 <h2 class="text-center">grid</h2>
+
+	 <div class="container">
+		<div class="row text-bg-dark">
+			<div class="col text-bg-danger">col</div>
+			<div class="col text-bg-warning">col</div>
+			<div class="col text-bg-success">col</div>
+		</div>
+		<div class="row text-bg-dark">
+			<div class="col text-bg-danger">col</div>
+			<div class="col text-bg-warning">col</div>
+			<div class="col text-bg-success">col</div>
+			<div class="col text-bg-info">col</div>
+			<div class="col text-bg-secondary">col</div>
+		</div>
+	 </div>
+
+	 <br>
+	 <br>
+	 <br>
+	 <div class="container bg-info">
+		<div class="row text-bg-dark">
+			<div class="col-4 text-bg-danger">col-4</div>
+			<div class="col-4 text-bg-primary">col-4</div>
+			<div class="col-4 text-bg-success">col-4</div>
+		</div>
+		<div class="row text-bg-dark">
+			<div class="col-4 text-bg-danger">col-4</div>
+			<div class="col-8 text-bg-primary">col-8</div>
+		</div>
+		<br>
+		<div class="row text-bg-dark">
+			<div class="col-4 text-bg-danger">col-4</div>
+			<div class="col-4 text-bg-primary">col-4</div>
+			<div class="col-4 text-bg-success">col-4</div>
+			<div class="col-4 text-bg-secondary">col-4</div>
+		</div>
+	 </div>
+
+	<!-- 브라우저 사이즈에 맞게 layout 구성
+		화면 사이즈에 따라 xs, sm, md, lg, xl, xxl
+		- col-{breakpoint}-{size}
+
+		ex.
+		- col-sm-{size}: 화면 크기가 sm 이상일 때
+		- col-md-{size}: 화면 크기가 md 이상일 때
+		- col-lg-{size}: 화면 크기가 lg 이상일 때
+		- col-xl-{size}: 화면 크기가 xl 이상일 때
+		- col-xxl-{size}: 화면 크기가 xxl 이상일 때
+	-->
+	<h2 class="text-center">반응형 layout</h2>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-8 col-sm-4 col-lg-10 bg-primary">col</div>
+			<div class="col-4 col-sm-8 col-lg-2 bg-warning">col</div>
+		</div>
+	</div>
+
+            
+    <div class="container">
+		<div class="row">
+            <!-- col 없이 col-{beakpoint}-{size}만 있는 경우
+                => breakpoint 이상에서는 size 만큼 너비를 차지하는데
+                => breakpoint 미만에서는 12만큼 (전체 너비만큼) 차지한다.  -->
+			<div class="col-md-2 bg-primary">col</div> <!--md 사이즈보다 작아지면 알아서 줄바꿈이 일어난다.-->
+			<div class="col-md-4 bg-danger">col</div>
+            <div class="col-md-6 bg-warning">col</div>
+		</div>
+	</div>        
+
+    <br>
+
+    <!-- 중첩 가능 -->
+    <div class="container">
+		<div class="row text-bg-dark">
+			<div class="col-4 text-bg-danger">col-4</div>
+			<div class="col-8 text-bg-primary">
+				<div class="row">
+					<div class="col-9 text-bg-success">col-9</div>
+					<div class="col-3 text-bg-info">col-3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+        <!--CDN Link (js)-->
+        <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

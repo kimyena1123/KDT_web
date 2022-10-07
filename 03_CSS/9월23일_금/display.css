@@ -1,0 +1,69 @@
+body{
+    padding-bottom : 500px;
+
+}
+.d-inline1{
+    display : inline;
+    background-color : red;
+}
+.d-inline2{
+    display : inline;
+    background-color : blue;
+}
+
+.d-block1{
+    display : block;
+    background-color : red;
+    width : 1200px;
+    height : 200px;
+    padding : 10px 30px
+}
+.d-block2{
+    display : block;
+    background-color : blue;
+}
+
+.d-inline-block1{
+    display : inline-block;
+    background-color : red;
+}
+.d-inline-block2{
+    display : inline-block;
+    background-color : blue;
+
+    width : 200px;
+    height : 200px;
+    margin : 10px;
+}
+
+.d-none{
+    width : 100px;
+    height : 100px;
+    background-color : Green;
+
+    display : none;
+}
+
+.none{
+    display : inline;
+    border : 1px solid black;
+    margin : 0 10px;
+}
+.none:hover{
+    background : #ddd;
+}
+.none:active{
+    background : red;
+}
+
+.topMenu{
+    padding-left : 0;
+}
+.topMenu li{
+    display : inline;
+    border : 1px solid black;
+    margin : 0 10px;
+}
+.topMenu li:hover{
+    background-color: #ccc;
+}

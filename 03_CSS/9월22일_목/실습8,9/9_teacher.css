@@ -1,0 +1,44 @@
+.container{
+    background-color: #bbb; /*#dddddd*/
+
+    /* rgb(r, g, b) 0 ~ 255 (256개)
+    rgba(r g, b, a) a: 0 ~ 1 */
+
+    width : 1000px;
+    height : 500px;
+
+    position : relative; /*기준*/
+}
+
+img{
+    width : 300px;
+    height : 200px;
+
+    position : absolute;
+    /* 
+        기준?
+            -조상 relative가 없으면 body 기준
+            -조상 relative가 있으면 해당 요소 기준 
+    */
+    transform : skewY(15deg);
+}
+
+.beach1{
+    top : 180px;
+    left : 200px;
+    z-index : 3;
+    /* transform : skewY(15deg); */
+    /*img에 해도 된다.*/
+}
+.beach2{
+    top : 150px;
+    left : 350px;
+    z-index : 2;
+    /* transform : skewY(15deg); */
+}
+.beach3{
+    top : 120px;
+    left : 500px;
+    z-index : 1;
+    /* transform : skewY(15deg); */
+}

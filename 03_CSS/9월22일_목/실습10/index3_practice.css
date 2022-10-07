@@ -1,0 +1,78 @@
+*{
+    box-sizing : border-box;
+}
+body{
+    padding : 0;
+    margin : 0;
+    background-color : #333;
+    height : 100vh;
+
+    display : flex;
+    justify-content : center;
+    align-items : center;
+
+}
+.card-list .card{
+    background-color : white;
+}
+p{
+    text-align : justify;
+}
+
+/* section */
+.card-list{
+    width : 80%;
+    display : flex;
+    flex-direction : row;
+}
+.card{
+    border : 1px solid black;
+    border-radius : 10px;
+    margin : 15px;
+    padding : 40px 30px;
+
+
+    /*class 내에서 display : flex;
+        article 내부의 사진, h1, p태그의 위치 조정 */
+    display : flex;
+
+    /* align-items : center; */
+}
+.card-list .card:nth-child(2n-1){
+    flex-direction : column;
+}
+.card-list .card:nth-child(2n){
+    flex-direction : column-reverse;
+}
+.card img{
+    width : 200px;
+    margin : 20px auto;
+    border : 1px solid black;
+}
+h1{
+    text-align : center;
+    font-size : 24px;
+    font-weight : 900;
+    
+}
+
+.card:hover{
+    transform : translateY(-50px);
+    cursor : pointer;
+    box-shadow : 12px 12px 20px #ffffff75;
+    font-style : italic;
+}
+
+
+#kiwoom:hover .title{
+    color : #820024;
+}
+#lotte:hover .title{
+    color : #002955;
+}
+#lg:hover .title {
+    color : #c30452;
+}
+#hanwha:hover .title{
+    color : #ff7700;
+}

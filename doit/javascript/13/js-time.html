@@ -1,0 +1,21 @@
+<!DOCTYPE>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <title>콘솔 창에서 오류를 찾고 수정하기(p.455)-현재 시각 나타내기.</title>
+        <style>
+            body{
+                font-size : 2em;
+                text-align : center;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            var now = new Date();
+            var display = now.toLocaleTimeString();
+            
+            document.write("현재 시각은 " + display);	
+        </script>
+    </body>
+</html>

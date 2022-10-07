@@ -1,0 +1,58 @@
+body{
+    border : 1px solid pink;
+}
+div{
+    width : 100px;
+    height : 100px;
+    font-weight : 700;
+    text-align : center;
+    line-height : 100px;
+}
+
+/* 
+    z-index
+        -레이어 효과 : 겹겹이 쌓이게 만드는 속성
+        -숫자 지정 -> 숫자가 클수록 위로 배치(z축 기준)
+        -양수, 음수 모두 가능
+        -기본값이 0이 아니라 auto 이다.
+ */
+.position-absolute{
+    position : absolute;
+}
+
+
+.div1{
+    background-color : red;
+    top : 100px;
+    left : 100px;
+
+    z-index : 8;
+}
+.div2{
+    background-color : orange;
+    top : 140px;
+    left : 140px;
+
+    z-index : 6;
+}
+.div3{
+    background-color : yellow;
+    top : 180px;
+    left : 180px;
+
+    z-index : 10;
+}
+.div4{
+    background-color : green;
+    top : 220px;
+    left : 220px;
+
+    z-index : 4;
+}
+.div5{
+    background-color : blue;
+    top : 260px;
+    left : 260px;
+
+    z-index : 5;
+}

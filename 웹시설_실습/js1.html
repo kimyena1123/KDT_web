@@ -1,0 +1,109 @@
+<!DOCTYPE>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <title>강동하가 시켜서 하는 js 연습</title>
+    </head>
+    <body>
+        <button onclick = "inntext()">새 시계 추가</button>
+
+        <button onclick = "hourplus()">1시간 증가</button>
+        <button onclick = "hourminus()">1시간 감소</button>
+        <button onclick = "minuteplus()">10분 증가</button>
+        <button onclick = "minuteminus()">10분 감소</button>
+        <button onclick = "secondplus()">10초 증가</button>
+        <button onclick = "secondminus()">10초 감소</button>
+
+        <div id = "current"></div>
+        <div id = "current2"></div>
+
+        
+
+        <script>
+            let name = prompt("첫번째 시계의 이름을 입력하세요");
+            let hour = prompt("첫번째 시계의 시간을 입력하세요");
+            let minute = prompt("첫번째 시계의 분을 입력하세요");
+            let second = prompt("첫번째 시계의 초를 입력하세요");
+
+            let name2 = prompt("두번째 시계의 이름을 입력하세요");
+            let hour2 = prompt("두번째 시계의 시간을 입력하세요");
+            let minute2 = prompt("두번째 시계의 분을 입력하세요");
+            let second2 = prompt("두번째 시계의 초를 입력하세요");
+
+            var now = new Date();
+            var now2 = new Date();
+
+            function simple_clock(){ // UTC 기준(UTC+0) 시계를 두자리 수 시계로 바꾸는 함수
+                hour = ('0' + now.getHours()).slice(-2);
+                minute = ('0' + now.getMinutes()).slice(-2);
+                second = ('0' + now.getSeconds()).slice(-2);
+
+                hour2 = ('0' + now2.getHours()).slice(-2);
+                minute2 = ('0' + now2.getMinutes()).slice(-2);
+                second2 = ('0' + now2.getSeconds()).slice(-2);
+            }
+
+            function print_result(){ // 결과 출력하는 함수
+                document.getElementById("current").innerHTML ="<br>시계[" + name + "] : " +  hour + ":" + minute + ":" + second;
+                document.getElementById("current2").innerHTML ="<br>시계[" + name2 + "] : " +  hour2 + ":" + minute2 + ":" + second2;
+            }
+            
+            function inntext(){
+                now.setHours(hour, minute, second);
+                now2.setHours(hour2, minute2, second2);
+                
+                simple_clock();
+                print_result();
+            }
+
+            function hourplus(){
+                now.setHours(now.getHours() + 1);
+                now2.setHours(now2.getHours() + 1);
+
+                simple_clock();
+                print_result();
+            }
+
+            function hourminus(){
+                now.setHours(now.getHours() - 1);
+                now2.setHours(now2.getHours() - 1);
+
+                simple_clock();
+                print_result();
+            }
+
+            function minuteplus(){
+                now.setMinutes(now.getMinutes() + 10);
+                now2.setMinutes(now2.getMinutes() + 10);
+
+                simple_clock();
+                print_result();
+            }
+
+            function minuteminus(){
+                now.setMinutes(now.getMinutes() - 10);
+                now2.setMinutes(now2.getMinutes() - 10);
+
+                simple_clock();
+                print_result();
+            }
+
+            function secondplus(){
+                now.setSeconds(now.getSeconds() + 10);
+                now2.setSeconds(now2.getSeconds() + 10);
+
+                simple_clock();
+                print_result();
+            }
+
+            function secondminus(){
+                now.setSeconds(now.getSeconds() - 10);
+                now2.setSeconds(now2.getSeconds() - 10);
+
+                simple_clock();
+                print_result();
+            }
+
+        </script>
+    </body>
+</html>

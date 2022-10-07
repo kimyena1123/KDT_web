@@ -1,0 +1,19 @@
+/* overflow : 컨텐츠가 넘치는 상황에서 어떻게 처리할 것인가
+    
+    -visible : 기본값으로 벗어난 부분 표시
+    -hidden : 벗어난 부분 자르기
+    -scroll : 영역에 맞게 스크롤으로 안에 내용을 확인하게 해 줌.(최신 브라우저 : auto 랑 같게 표시되기도 함)
+    -auto : 넘칠 떄만 스크롤 표시
+
+
+    - overflow-x
+    - overflow-y
+*/
+
+.parent{
+    width : 400px;
+    height : 100px;
+    background-color :skyblue;
+    /* overflow : auto; */
+    overflow-y : scroll;
+}

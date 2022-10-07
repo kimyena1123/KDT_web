@@ -1,0 +1,100 @@
+body{
+    /*기본 폰트는 body 태그에*/
+    /* font-family: 'Noto Sans KR', sans-serif; */
+
+}
+h1{
+     font-family: 'Aref Ruqaa Ink', cursive;
+}
+div{
+    color : black;
+    /* background-color : pink; */
+    /* background: linear-gradient(to bottom right, yellow, pink); */
+    background : linear-gradient(90deg, yellow, pink);
+    /* height : 300px; */
+
+    /* 폰트 */
+    /* [font-size] px 단위*/
+    font-size : 50px;
+
+    /* [font-weight] : 폰트 굵기*/
+    /* lighter */
+    /* font-weight : normal bold bolder */
+    /* 100~900 까지의 숫자로도 가능 */
+    font-weight : 700;
+
+    /* [font-family] : 글씨체 */
+    /* serif sans-seif monospace monospace*/
+    /*font-family : cursive;*/
+    /* 여러 개 설정시 선언된 순서로 적용함 */
+    /* 영어, 한글 글꼴 다르게 - 한글 없는 폰트를 먼저 -> 한글 폰트 */
+    /* font-family : Georgia, "Malgen Gothic"; */
+
+
+    /*[웹폰트]
+    /*모든 사용자가 동일한 폰트로 화면을 볼 수 있음*/
+
+    /* [font-style] : 글자모양 */
+
+    /*italic : 필기체 느낌*/
+    /* oblique : 보통 모양의 기울임 */
+    font-style : italic;
+
+    /* 크기 */
+    width : 600px;
+    /* height : 60px; */
+
+    /* 테두리, 경계선 */
+    /* style 지정해야 -> width, color 의미 있음 */
+    /* border-style : solid;
+    border-width : 4px;
+    border-color : blue; */
+    /* solid dotted dashed inset */
+    /* border : solid 5px red; */
+    /* border-radius : 5px 30px; 위 왼쪽 , 아래 오른쪽 */
+    /* border-radius : 5px 20px 45px 80px; */
+
+    /* border : width style, color 한 번에 설정 가능 */
+    border-top : 10px solid limegreen;
+    border-bottom : 10px solid limegreen;
+
+    /* 박스 모델 */
+    /* 요소의 너비와 높이를 계산하는 방식 지정 */
+    /* content -> padding -> border -> margin */
+    box-sizing : border-box;
+
+    /* margin, padding */
+    /* padding : content와 border 사이의 공간 */
+    /* margin : border 바깥공간 */
+    /* padding : 20px; */
+    /* margin : 50px; */
+    /* padding-top : 20px;
+    padding-bottom : 20px;
+    padding-left : 50px;
+    padding-right : 50px; */
+    padding : 20px 50px; /*상하 / 좌우*/
+
+    /* margin-top : 50px;
+    margin-bottom : 50px;
+    margin-left : 50px;
+    margin-left : 50px; */
+    margin : 50px 30px; /*상하 / 좌우*/
+
+}
+
+p{
+    font-size : 50px;
+    font-weight : 700;
+    
+    width : 400px;
+    border : 1px solid black;
+
+    /* 그림자 효과 */
+    /* box-shadow */
+    /* xoffset yoffset blur color */
+    box-shadow : 10px 10px 10px rgba(0,0,0,.4);
+
+    /* text-shadow */
+    text-shadow : 1px 1px 2px  rgba(0,0,0, .5);
+
+}

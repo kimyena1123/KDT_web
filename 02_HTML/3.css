@@ -1,0 +1,20 @@
+h1{
+    color : green;
+    text-align : center;
+}
+table{
+    width : 490px;
+    height : 400px;
+    text-align : center;
+    margin : 0 auto;
+}
+.red{
+    color : red;
+}
+.blue{
+    color : blue;
+}
+
+.red ~ .r{
+    color : red;
+}

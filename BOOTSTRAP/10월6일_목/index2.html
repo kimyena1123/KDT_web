@@ -1,0 +1,127 @@
+<!DOCTYPE>
+<html lang = "ko">
+    <head>
+        <meta charset = "UTF-8">
+        <title>bootstrap</title>
+
+        <style>
+            body{
+                padding-bottom : 1000px;
+            }
+        </style>
+        <!--CDN Link (css)-->
+        <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1>bootstrap Utilities</h1>
+
+        <h3>background-color</h3>
+        <h5>p-3 : padding의 값이 3만큼</h5>
+        <h5>mb-3 : margin-bottom 3</h5>
+        <h5>text-white : color를 white로</h5>
+
+        <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+        <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
+        <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+        <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
+        <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+        <div class="p-3 mb-2 bg-info text-dark">.bg-info</div>
+        <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
+        <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
+            <div class="p-3 mb-2 bg-body text-dark">.bg-body</div>
+        <div class="p-3 mb-2 bg-white text-dark">.bg-white</div>
+        <div class="p-3 mb-2 bg-transparent text-dark">.bg-transparent</div>
+
+        <h3>border</h3>
+
+        <span class="border border-primary">hello</span>
+        <span class="border border-secondary border-top-0">hello</span>
+        <span class="border-success border-bottom">hello</span>
+        <span class="border border-danger">hello</span>
+        <span class="border border-warning">hello</span>
+        <span class="border border-info">hello</span>
+        <span class="border border-light">hello</span>
+        <span class="border border-dark">hello</span>
+        <span class="border border-white">hello</span>
+
+        <br><br>
+
+        <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control border-success" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+          
+          <div class="h4 pb-2 mb-4 text-danger border-bottom border-danger">
+            Dangerous heading
+          </div>
+          
+          <div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+            Changing border color and width
+          </div>
+
+
+          <h3>color</h3>
+
+          <p class="text-primary">.text-primary</p>
+          <p class="text-secondary">.text-secondary</p>
+          <p class="text-success">.text-success</p>
+          <p class="text-danger">.text-danger</p>
+          <p class="text-warning bg-dark">.text-warning</p>
+          <p class="text-bg-warning text-danger">노란색 박스</p>
+
+          <p class="text-info bg-dark">.text-info</p>
+          <p class="text-light bg-dark">.text-light</p>
+          <p class="text-dark">.text-dark</p>
+          <p class="text-body">.text-body</p>
+          <p class="text-muted">.text-muted</p>
+          <p class="text-white bg-dark">.text-white</p>
+          <p class="text-black-50">.text-black-50</p>
+          <p class="text-white-50 bg-dark">.text-white-50</p>
+
+          <h3>spacing(margin,padding)</h3>
+          <hr>
+          <div class = "mb-5 text-bg-danger">.text-warning</div>
+          <div class = "ms-3 text-bg-primary text-center">.text-warning</div>
+
+          <br><hr>
+
+          <h3>dispaly : inline</h3>
+          <h5>컨텐츠만큼 너비 차지, 줄바꿈X</h5>
+
+          <div class="d-inline p-2 text-bg-primary">d-inline</div>
+          <div class="d-inline p-2 text-bg-dark">d-inline</div>
+
+          <br><hr>
+
+          <h3>display : block</h3>
+          <h5>전체 너비 차지, 줄바꿈을 해준다</h5>
+          <h5>w-{size} : width : size(0, 25, 50, 75, 100)</h5>
+          <h5>h-{size} : height : size(0, 25, 50, 75, 100)</h5>
+          <span class="d-block p-2 text-bg-primary w-50">d-block</span>
+          <span class="d-block p-2 text-bg-dark">d-block</span>
+
+          <h3>display : none</h3>
+          <h5>화면에서 사라지게 함</h5>
+
+          <span class="d-none p-2 text-bg-dark w-25">d-none</span>
+
+
+
+          <h2>display : flex</h2>
+          <h5>부모 요소에 flex -> 자식 요소들이 inlilne이 된다.</h5>
+
+
+          <h5>justify-content-center ->justify-content : center</h5>
+          <h5>교차축 => align-items-center == align-items : center;</h5>
+	    <div class="parent border border-info d-flex justify-content-center align-items-center" style="height: 300px;">
+		    <div class="child text-bg-danger" style="width: 100px; height: 100px;">child</div>
+		    <div class="child text-bg-primary" style="width: 100px; height: 100px;">child</div>
+		    <div class="child text-bg-warning" style="width: 100px; height: 100px;">child</div>
+	    </div>
+
+
+
+        <!--CDN Link (js)-->
+        <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

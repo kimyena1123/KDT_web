@@ -1,0 +1,15 @@
+body{
+    margin : 0px;
+}
+div{
+    margin : 20px;
+    padding : 20px;
+    border : 20px solid black;
+    width : 500px;
+}
+#content{
+    box-sizing : content-box;
+}
+#border{
+    box-sizing : border-box;
+}

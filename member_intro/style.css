@@ -1,0 +1,205 @@
+/* COMMON */
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  .member_1{
+    background-color: rgb(246, 200, 117);
+  }
+  .member_3{
+    background-color : pink;
+  }
+  .member_2{
+    background-color : rgb(195, 236, 249);
+  }
+  section{
+    background-color : white;
+    padding : 50px;
+    border-radius : 10px;
+    box-shadow : 10px 10px 10px rgba(0,0,0,.2);
+  }
+  .member_1 > .wrap > .profile > img{
+    border : 1px solid rgb(249, 219, 178);
+    border-radius : 50%;
+    box-shadow : 10px 15px 10px rgb(249, 219, 178);
+  }
+  .member_2 > .wrap > .profile > img{
+    border : 1px solid rgb(195, 236, 249);
+    box-shadow : 10px 15px 10px rgb(195, 236, 249);
+  }
+  .member_3 > .wrap > .profile > img{
+    border : 1px solid rgb(246, 177, 242);
+    border-radius : 50%;
+    box-shadow : 10px 15px 10px rgb(246, 177, 242);
+  }
+  img{
+    width : 200;
+    height : 200;
+    border : 1px solid black;
+    border-radius : 50%;
+    box-shadow : 10px 15px 10px rgb(195, 236, 249);
+  }
+  h1, p, .btnView, .contact{
+    text-align : center;
+  }
+  p{
+    color : rgb(159, 154, 154);
+    font-size : 15px;
+  }
+  h1{
+    margin-top : 20px;
+    font-size : 25px;
+  }
+  p, .btnView{
+    margin-top : 10px;
+  }
+  .member_1 > .wrap > .profile > .btnView{
+    border : 1px solid rgba(239, 158, 7, 0.2);
+    border-radius : 20px;
+    padding : 3px;
+    color : white;
+    font-size : 20px;
+    font-weight : 700;
+    background-color : rgb(241, 150, 21);
+    box-shadow : 6px 8px 10px rgb(246, 200, 117);
+  }
+  .member_3 > .wrap > .profile > .btnView{
+    border : 1px solid rgba(239, 158, 7, 0.2);
+    border-radius : 20px;
+    padding : 3px;
+    color : white;
+    font-size : 20px;
+    font-weight : 700;
+    background-color : rgb(240, 104, 211);
+    box-shadow : 6px 8px 10px rgb(246, 177, 242);
+  }
+  .profile > .btnView{
+    border : 1px solid rgba(239, 158, 7, 0.2);
+    border-radius : 20px;
+    padding : 3px;
+    color : white;
+    font-size : 20px;
+    font-weight : 700;
+    background-color : rgb(39, 161, 231);
+    box-shadow : 6px 8px 10px rgb(195, 236, 249);
+  }
+  ul,ol {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: #555;
+  }
+  .contact{
+    margin : 20px;
+  }
+  .contact > li{
+    border-bottom : 1px solid black;
+  }
+  .contact > li:last-child {
+    border : none;
+  }
+  
+  .contact > a:visited {
+    color: #555;
+  }
+
+  
+  /* SECTION.WRAP */
+  .wrap {
+    /* 다음 시간에 배우게 될 속성입니다 :) 카드를 body 태그의 정가운데 배치하는 코드예요. */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* ARTICLE.PROFILE */
+  .wrap .profile .btnView {
+    /* 다음 시간에 배우게 될 속성입니다 :) .btnView 요소(a태그)를 block 요소로 만들어줘요 */
+    /* 블록 요소가 되었으므로 width, height 속성 사용이 가능해요. width, height 를 이용해 버튼 크기를 지정해주세요! */
+    display: block;
+  }
+  
+  /* UL.CONTACT */
+  .wrap .others a {
+    /* 다음 시간에 배우게 될 속성입니다 :) .others 요소 하위에 있는 a 태그들(3개)을 inline-block 요소로 만들어줘요 */
+    /* 인라인-블록 요소도 블록요소와 마찬가지로 width, height 속성 사용이 가능해요. width, height 를 이용해 버튼 크기를 지정해주세요! */
+    display: inline-block;
+  }
+  
+  .others > a{
+    border : 1px solid gray;
+    background-color : gray;
+    border-radius : 50%;
+    width : 30px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 20px;
+    text-align : center;
+  }
+  .member_1 > .others > a{
+    border : 1px solid rgb(241, 150, 21);
+    border-radius : 50%;
+    width : 30px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 20px;
+    text-align : center;
+  }
+
+  .member_3 > .others > a{
+    border : 1px solid rgb(246, 177, 242);
+    border-radius : 50%;
+    width : 30px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 20px;
+    text-align : center;
+  }
+
+  .member_3 > .others > a{
+    border : 5px solid rgb(246, 177, 242);
+    border-radius : 50%;
+    width : 30px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 20px;
+    text-align : center;
+  }
+  
+  .member_2 > .others > a{
+    border : 1px solid rgb(93, 196, 228);
+    border-radius : 50%;
+    width : 30px;
+    height : 30px;
+    margin : 10px;
+    margin-left : 20px;
+    text-align : center;
+  }
+  /* 다음 시간에 배우게 될 선택자입니다 :) nth-of-type() 은 가상선택자로, 몇 번째 요소인지 판단하는 요소예요. */
+  /* a.on:nth-of-type(n) 은 a태그이자 .on 클래스를 갖는 n번째 요소를 선택해줍니다. */
+  .wrap .others a.on:nth-of-type(1) {
+    /* 이 곳에 필요한  style을 선언해주세요. */
+    background-color : orange;
+  }
+  
+  .wrap .others a.on:nth-of-type(2) {
+    /* 이 곳에 필요한  style을 선언해주세요. */
+    background-color : rgb(93, 196, 228);
+    box-shadow : 6px 8px 10px rgb(195, 236, 249);
+  }
+  
+  .wrap .others a.on:nth-of-type(3) {
+    /* 이 곳에 필요한  style을 선언해주세요. */
+    background-color : rgb(240, 104, 211);
+    box-shadow : 3px 3px 10px rgb(246, 177, 242);
+  }
+  
+  /* HINT: index.html 먼저 완성한 후, member_2.html, member_3.html에서 변경되는 css 속성(ex. 배경색 등)을 아래에 추가해주세요! */
+  /* MEMBER_2 CUSTOM */
+  
+  /* MEMBER_3 CUSTOM */
+  
