@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이아웃-grid</title>
+    <style>
+        *{
+            margin : 0;
+            padding : 0;
+            box-sizing : border-box;
+        }
+        #container{
+            color : white;
+            display : grid;
+
+            grid-template-areas: 
+            'header'
+            'slideShow'
+            'contents'
+            'footer';
+
+            grid-template-columns: 1fr;
+            height : 100vh;
+            grid-template-rows: 100px 300px 1fr 100px;
+        }
+        header{
+            background-color : blue;
+            
+            display : grid;
+
+            grid-template-areas: 
+            'logo none nav';
+
+            grid-template-columns: 200px 1fr;
+        }
+
+        #logo{
+            background-color : indigo;
+        }
+        nav{
+            background:  green;
+        }
+        #slideShow{
+            background-color: orange;
+        }
+        #contents{
+            background-color : pink;
+
+            display : grid;
+
+        grid-template-areas: 
+        'tabMenu . links';
+
+        grid-template-columns: 1fr 1fr;
+        }
+        #tabMenu{
+            background-color: violet;
+        }
+        #links{
+            background-color: skyblue;
+        }
+        footer{
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div id = "container">
+        <header>
+            <!-- header -->
+            <div id = "logo">
+                logo
+            </div>
+
+            <nav>
+                nav
+            </nav>
+        </header>
+
+        <div id = "slideShow">
+            slideShow
+        </div>
+
+        <div id = "contents">
+            <div id = "tabMenu">
+                tabMenu
+            </div>
+            <div id = "links">
+                links
+            </div>
+        </div>
+
+        <footer>
+            footer
+            <div id = "bottomMenu">
+<!-- 
+            </div>
+            <div id = "company">
+
+            </div> -->
+        </footer>
+    </div>
+</body>
+</html>
