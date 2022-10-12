@@ -1,0 +1,57 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+#container{
+    display : grid;
+
+    grid-template-areas:
+    'header'
+    'slideShow'
+    'contents'
+    'footer';
+    
+    height : 100vh;
+    grid-template-columns: 100%;
+    grid-template-rows: 70px 300px 1fr 70px;
+}
+header{
+    background-color: gray;
+
+    display : grid;
+
+    grid-template-areas:
+    'logo nav menubar';
+    grid-template-columns: 400px 1fr 200px;
+}
+#logo{
+    background-color: #b6d0e1;
+}
+nav{
+    background-color: #1a456B;
+}
+#menubar{
+    background-color: #678dab
+}
+
+
+#slideShow{
+    background-color: pink;
+}
+#slideShow{
+    background-color: skyblue;
+}
+#slideShow > img{
+    width : 100%;
+    height : 100%;
+}
+
+
+
+#contents{
+    background-color: yellow;
+}
+footer{
+    background-color: gray;
+}
