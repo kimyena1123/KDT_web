@@ -107,3 +107,29 @@ setTimeout(function(){
     }, 1000)
 },1000)
 
+
+return new Promise(function(resolve, reject){
+    setTimeout(function(){
+        document.body.style.backgroundColor = "red";
+
+        resolve();
+    },1000)
+    setTimeout(function(){
+        document.body.style.backgroundColor = 'orange';
+
+        resolve();
+    },1000)
+    setTimeout(function(){
+        document.body.style.backgroundColor = 'yellow';
+
+        resolve();
+    },1000)
+    setTimeout(function(){
+        document.body.style.backgroundColor = 'green';
+
+        resolve();
+    },1000)
+    setTimeout(function(){
+        document.body.style.backgroundColor = 'blue';
+    },1000)
+})

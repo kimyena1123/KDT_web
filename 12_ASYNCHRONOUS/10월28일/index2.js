@@ -143,6 +143,9 @@ add(4, 3, function(x){ // add 함수 정의부의 callback(result)
 
 //step2. promise 체이닝 사용
 
+
+
+
 function add(n1, n2){
 
     return new Promise(function (resolve, reject){
@@ -200,6 +203,18 @@ function sub(n){
 //   });
 
 
+add(4, 3, function(x){ // add 함수 정의부의 callback(result)
+    console.log("1 :" + x); // 7; 
+
+    mul(x, function(y){ // mul 함수 정의부의 callback(result)
+        console.log('2 : ' + y);
+
+        sub(y, function(z){
+            console.log('3 : ' + z); // sub 함수 정의부의 callback(result)
+        })
+    })
+})
+
 
 add(4 , 3)
     .then(function(result){
@@ -225,3 +240,14 @@ add(4 , 3)
     // })
 
 
+    add(4, 3, function(x){ // add 함수 정의부의 callback(result)
+        console.log("1 :" + x); // 7; 
+    
+        mul(x, function(y){ // mul 함수 정의부의 callback(result)
+            console.log('2 : ' + y);
+    
+            sub(y, function(z){
+                console.log('3 : ' + z); // sub 함수 정의부의 callback(result)
+            })
+        })
+    })
