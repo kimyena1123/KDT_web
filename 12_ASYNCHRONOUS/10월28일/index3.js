@@ -39,6 +39,10 @@ function pickDrink(){
 
 }
 
+function pay(){
+    console.log(`${product} 제품의 가격은 ${price}이다.`);
+}
+
 
 async function exec(){ //await는 async가 실행되는 함수 안에 선언되어야 한다.
     goMart();
@@ -48,9 +52,6 @@ async function exec(){ //await는 async가 실행되는 함수 안에 선언되�
 
 exec();
 
-function pay(){
-    console.log(`${product} 제품의 가격은 ${price}이다.`);
-}
 
 
 

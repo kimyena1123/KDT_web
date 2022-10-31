@@ -7,6 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>폼 전송을 배워보자</h1>
+    <h1><%= title %></h1>
+    <p><%= desc %></p>
+
+
+    <h2>GET 요청</h2>
+
+    <form action="/getForm" method = "get" name = "login1">
+        <input id = "id" name = "id" type = "text" placeholder="ID">
+        <input id = "pw" name = "pw" type = "password" placeholder="PASSWORD">
+        <button type = "submit">제출</button>
+    </form>
+    <br>
+
+    <h2>POST 요청</h2>
+    <form action="/postForm" method="post" name = "login2">
+        <input id = "id" name = "id" type = "text" placeholder="ID">
+        <input id = "pw" name = "pw" type = "password" placeholder="PASSWORD">
+        <button type = "submit">제출</button>
+    </form>
+
+    <script>
+        //form 태그의 name 속성 값으로 폼 선택하기
+        console.log("login1 : " + document.forms['login1']);
+        console.log("login2 : " + document.forms['login2']);
+    </script>
+    
 </body>
-</html>
+</html>````

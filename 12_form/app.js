@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 const app = express();
 const PORT = 8000;
@@ -12,14 +13,33 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.json()); // json 형태로 데이터를 전달받음
 
 
-
 // Routing - 경로 설정
 //-req(request) : 요청 (cliend - > sever)
 //-res(response) : 응답 (server -> client)
 app.get('/', function(req, res){ // GET / (http://locahost:PORT)
     //res.send('root page);
-    res.render('index'); ///views/index.ejs 파일을 찾아서 clien에게 "응답"함.
+    res.render('index', {title: "폼 전송을 배워보자", desc : '여기는 설명'}); ///views/index.ejs 파일을 찾아서 clien에게 "응답"함.
 });
+
+
+app.get('/getForm', function(req, res){
+    //GET 요청은 req.query 객체에 폼 정보가 전달
+    console.log(req.query);
+    // res.send('get 요청 응답 성공');
+    res.render('result', 
+    {title : 'get 요청 성공',
+    userInfo: req.query});
+});
+
+app.post('/postForm', function(req, res){
+    //POST 요청은 req.body 객체에 폼 정보가 전달
+    console.log(req.body)
+    // res.send('post 요청 응답 성공');
+    res.render('result', 
+    {title: 'post 요청 성공',
+    userInfo: req.body});
+})
+
 
 app.listen(PORT, function(){
     console.log(`http://localhost:${PORT}`);
