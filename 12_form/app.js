@@ -22,6 +22,16 @@ app.get('/', function(req, res){ // GET / (http://locahost:PORT)
 });
 
 
+app.get("/prac24", function(req, res){
+    res.render('prac24');
+  })
+
+  app.get("/prac27", function(req, res){
+    res.render('prac27');
+  })
+
+
+
 app.get('/getForm', function(req, res){
     //GET 요청은 req.query 객체에 폼 정보가 전달
     console.log(req.query);
@@ -30,6 +40,25 @@ app.get('/getForm', function(req, res){
     {title : 'get 요청 성공',
     userInfo: req.query});
 });
+
+app.get('/gettable', function(req, res){
+    console.log(req.query);
+    
+    res.render('prac24_result',
+    {title: '실습26 폼 전송 완료!',
+    userInfo: req.query});
+});
+
+
+app.post('/posttable', function(req, res){
+    console.log(req.body);
+    
+    res.render('prac27_result',
+    {title: '실습27 폼 전송 완료!',
+    userInfo: req.body});
+});
+
+
 
 app.post('/postForm', function(req, res){
     //POST 요청은 req.body 객체에 폼 정보가 전달

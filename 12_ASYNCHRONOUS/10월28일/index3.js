@@ -44,6 +44,12 @@ function pay(){
 }
 
 
+
+
+goMart();
+pickDrink().then(pay)
+// pickDrink().then(pay).catch(nopay);
+
 async function exec(){ //await는 async가 실행되는 함수 안에 선언되어야 한다.
     goMart();
     await pickDrink(); //3초 시간이 걸리는 작업
