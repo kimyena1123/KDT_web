@@ -25,11 +25,11 @@
 
     <form name = "register">
         <label for = "name">이름</label>
-        <input type = "text" id = "name" name = "name">
+        <input type = "text" id = "name" name = "name" required>
         <br />
     
         성별
-        <input type = "radio" id = "gender" name = "male" value = "male">
+        <input type = "radio" id = "gender" name = "male" value = "male" required>
         <label for = "male">남자</label>
         <input type = "radio" id = "gender" name = "female" value = "female">
         <label for = "female">여자</label>
@@ -126,9 +126,12 @@
             console.log("##########click axiosGet #########");
 
             const form = document.forms['register'];
-            console.dir(form)
-            console.dir(form.name)
-            console.dir(form.gender)
+            console.dir(form); 
+            console.dir(form.name); //input name
+            console.dir(form.gender); // input gender //gender는 radio로 "배열!!!!!!"로 잡힌다.
+
+            console.log('여기여기', form.name.checkValidity());
+            console.log('여기여기 비밀번호', form.gender[0].checkValidity()) //배열로 잡히기에 인덱스 번호로 접근해야 한다.
 
             const data = {
                 name: form.name.value,
@@ -136,20 +139,32 @@
             };
 
             //AXIOS 비동기 통시 - GET /axios요청
-            axios({
-                method: 'GET',
-                url: '/axios',
-                params: data, // GET 요청은 params에 정보를 실어서 보내야 한다.
-
-            }).then(function(response){ //axios는 promise를 반환한다.!!!
-                console.log(response); //서버의 응답결과
-                console.log(response.data); // res.send
-                console.log(response.data.name);
-                console.log(response.data.gender);
-
-                resultBox.textContent = `GET /axios 요청 완료! ${data.name}님은 ${data.gender}이다.`;
-                resultBox.style.color = 'green';
-            });
+            //사용자의 입력이 올바르지 않다면, axios 요청시도하면 안된다.
+            //사용자의 입력이 올바르다면, axios 요청을 시도해야 한다.!!!!!
+            if(form.name.checkValidity() === true && form.gender[0].checkValidity() === true )
+            {
+                axios({
+                    method: 'GET',
+                    url: '/axios',
+                    params: data, // GET 요청은 params에 정보를 실어서 보내야 한다.
+    
+                }).then(function(response){ //axios는 promise를 반환한다.!!!
+                    console.log(response); //서버의 응답결과
+                    //여기서 response는 서버가 주는 응답을 받는 reposne 매개변수이다.
+    
+                    console.log(response.data); // res.send
+                    console.log(response.data.name);
+                    console.log(response.data.gender);
+    
+                    resultBox.textContent = `GET /axios 요청 완료! ${data.name}님은 ${data.gender}이다.`;
+                    resultBox.style.color = 'green';
+                });
+            }
+            else{
+                resultBox.textContent = `입력을 제대로 해주세요.`;
+                    resultBox.style.color = 'green';
+            }
+            
         }
 
         function axiosPost(){
@@ -168,10 +183,11 @@
                 data: data, //POST 요청은 "data"에 정보를 실어서 보내야 됨
 
             }).then(function(response){
-                console.log(response);
+                console.log(response); // 서버가 준 응답을 확인.!!!
                 console.log(response.data);
 
 
+                //${res.data.userInfo.name}
                 resultBox.textContent = `POST /axios 요청 완료! ${data.name}님은 ${data.gender}이다.`;
                 resultBox.style.color = 'gold';
             })
@@ -218,7 +234,7 @@
                 }, 
                 body: JSON.stringify(data),
             })
-            .then(function(response){
+            .then(function(response){ 
                 console.log(response);
 
                 return response.json();
