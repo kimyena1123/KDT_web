@@ -7,22 +7,29 @@ const multer = require('multer');
 const path = require('path');
 
 const upload = multer({
-    dest: 'uploads/',
+    dest: 'uploads/', //저장경로
 });
-
 const upleadDetail = multer({
     storage: multer.diskStorage({
         destination(req, file, done){
             //req: 요청에 대한 정보
             //file: 파일에 대한 정보
-            //done(에러, 저장경로): 함순
+            //done(에러, 저장경로): 함수
             done(null, 'uploads/'); //경로 설정. 위에 dest와 같은 파일에
         },
         filename(feq, file, done){
             //req: 요청에 대한 정보
             //fiile: 파일에 대한 정보
             //done: 함수
+
             const ext = path.extname(file.originalname); //file.originalname에서 "확장자" 추출하는 과정
+
+            //test
+            console.log(file.originalname);
+            console.log(ext);
+            console.log(path.basename(file.originalname, ext));
+
+
             done(null, path.basename(file.originalname, ext) + Date.now() + ext);
             //[파일명+현재시간.확장자] 이름으로 바꿔서 파일 업로드하는 코드
             //현재시간 붙이는 이유: 파일명이 겹치는 것을 막기 위함이다.
@@ -38,6 +45,10 @@ app.use(express.json());
 
 app.get('/', function(req, res){
     res.render('index', {title: 'file_upload'});
+});
+
+app.get('/prac31', function(req, res){
+    res.render('prac31', {title: '실습31'});
 });
 
 //1. single(): 하나의 파일 업록드할 때
@@ -66,6 +77,23 @@ app.get('/', function(req, res){
 
     res.send("Upload finish")
 });
+
+
+//2. array(): 여러 파일을 하나의 input에 업로드 할 때
+//array()=> req.files 객체에 파일 정보
+app.post('/upload/array', upleadDetail.array('userfiles'), function(req, res){
+    console.log(req.files); // [{}, {}, {}, {}] 형식으로 파일 정보 확인
+    console.log(req.body); // 
+    res.send('UPLODED Multiple!!');
+});
+
+//3. fields(): 여러 파일을 각각의 input에 업로드할 때
+app.post('/upload/fields', upleadDetail.fields([{name: 'userfile1'}, {name: 'userfile2'}]), function(req, res){
+    console.log(req.files);
+    console.log(req.body); //[Object: null prototype] { title1: 'aaa', title2: 'bbb' }
+    res.send('UPLOAD MULTIPLE FILEDS');
+})
+
 
 
 app.listen(PORT, function(){
