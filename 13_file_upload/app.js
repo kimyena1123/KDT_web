@@ -17,7 +17,7 @@ const upleadDetail = multer({
             //done(에러, 저장경로): 함수
             done(null, 'uploads/'); //경로 설정. 위에 dest와 같은 파일에
         },
-        filename(feq, file, done){
+        filename(req, file, done){
             //req: 요청에 대한 정보
             //fiile: 파일에 대한 정보
             //done: 함수
@@ -25,12 +25,13 @@ const upleadDetail = multer({
             const ext = path.extname(file.originalname); //file.originalname에서 "확장자" 추출하는 과정
 
             //test
-            console.log(file.originalname);
+            console.log("test!!!!!!:" + file.originalname);
             console.log(ext);
-            console.log(path.basename(file.originalname, ext));
+            console.log("basename : " + path.basename(file.originalname, ext));
+            console.log("아이디로 붇이기: " + req.body.id);
 
 
-            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+            done(null, path.basename(req.body.id, ext) + Date.now() + ext);
             //[파일명+현재시간.확장자] 이름으로 바꿔서 파일 업로드하는 코드
             //현재시간 붙이는 이유: 파일명이 겹치는 것을 막기 위함이다.
         }
@@ -38,10 +39,12 @@ const upleadDetail = multer({
     limits:{fileSize: 5 * 1024 * 1024},
 })
 
+
 app.set('view engine', 'ejs');
 app.use('/views', express.static(__dirname + '/views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/uploads', express.static(__dirname + '/uploads')); 
 
 app.get('/', function(req, res){
     res.render('index', {title: 'file_upload'});
@@ -77,6 +80,18 @@ app.get('/prac31', function(req, res){
 
     res.send("Upload finish")
 });
+
+app.post('/upload2', upleadDetail.single('userfile'), function(req, res){
+    console.log(req.file);
+    console.log(req.body);
+
+   // res.send('UPload success');
+   res.render('result', {title: '파일 연결 성공!', userInfo: req.body, fileInfo: req.file.filename});
+})
+
+
+
+
 
 
 //2. array(): 여러 파일을 하나의 input에 업로드 할 때
