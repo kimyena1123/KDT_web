@@ -14,7 +14,7 @@ function promise1(flag){
 
     return new Promise(function (resolve, reject){
         if(flag === true){
-            resolve(`promise 상태는 fulfilled! then()으로 연결됩니다. \n 이떄 flag가  ${flag}입니다`);
+            resolve(`promise 상태는 fulfilled! then()으로 연결됩니다.
         } //true
         //resolve -> then으로 연결
         else{

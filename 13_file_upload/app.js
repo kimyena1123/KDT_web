@@ -30,13 +30,13 @@ const upleadDetail = multer({
             console.log("basename : " + path.basename(file.originalname, ext));
             console.log("아이디로 붇이기: " + req.body.id);
 
-
-            done(null, path.basename(req.body.id, ext) + Date.now() + ext);
+            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+           // done(null, path.basename(req.body.id, ext) + Date.now() + ext);
             //[파일명+현재시간.확장자] 이름으로 바꿔서 파일 업로드하는 코드
             //현재시간 붙이는 이유: 파일명이 겹치는 것을 막기 위함이다.
         }
     }),
-    limits:{fileSize: 5 * 1024 * 1024},
+   // limits:{fileSize: 5 * 1024 * 1024},
 })
 
 
@@ -90,10 +90,6 @@ app.post('/upload2', upleadDetail.single('userfile'), function(req, res){
 })
 
 
-
-
-
-
 //2. array(): 여러 파일을 하나의 input에 업로드 할 때
 //array()=> req.files 객체에 파일 정보
 app.post('/upload/array', upleadDetail.array('userfiles'), function(req, res){
@@ -109,6 +105,16 @@ app.post('/upload/fields', upleadDetail.fields([{name: 'userfile1'}, {name: 'use
     res.send('UPLOAD MULTIPLE FILEDS');
 })
 
+
+// 4. 동적 파일 업로드
+app.post(
+  '/dynamicFile',
+  upleadDetail.single('dynamicFile'),
+  function (req, res) {
+    console.log(req.file);
+    res.send(req.file);
+  }
+);
 
 
 app.listen(PORT, function(){
