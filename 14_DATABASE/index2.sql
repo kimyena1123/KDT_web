@@ -115,3 +115,4 @@ FROM customer
 	INNER JOIN orderlist
 	ON customer.id = orderlist.customer_id
 WHERE orderlist.id = 3;
+
