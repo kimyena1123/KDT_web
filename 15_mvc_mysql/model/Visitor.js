@@ -71,6 +71,8 @@ exports.deleteVisitor = (id, callback) => {
             }
 
             console.log("Visitor.js : " + rows);
-            callback(true); //삭제성공을 의미
+            //callback(true); //삭제성공을 의미
+            callback(true);
+
         })
 }
