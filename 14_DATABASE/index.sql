@@ -57,6 +57,15 @@ CREATE TABLE member(
     promotion VARCHAR(2) DEFAULT 'x' -- defalt값을 줘야 오류가 안난다.
 );
 
+CREATE TABLE user3(
+    id VARCHAR(10) NOT NULL PRIMARY KEY,
+    pw VARCHAR(20) NOT NULL,
+    name VARCHAR(5) NOT NULL,
+    gender ENUM('F', 'M','') DEFAULT '',
+    birthday DATE NOT NULL,
+    age INT(3) NOT NULL DEFAULT 0
+);
+
 -- 2. 테이블 목록 확인 
 SHOW tables;
 
@@ -108,6 +117,38 @@ INSERT INTO user2 (name, age, address) VALUES ('윤새희', 37, '강원도 강�
 INSERT INTO user2 (name, age, address) VALUES ('박수진', 26, '충청남도 공주시');
 INSERT INTO user2 (name, age, address) VALUES ('박찬희', 40, '강원도 속초시');
 INSERT INTO user2 (name, age, address) VALUES ('권희수', 36, '서울특별시 영등포구');
+
+--실습문제
+ -- id, pw, name , gender, birthday, age순
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('hong1234', '8o4bkg', '홍길동', 'M', '1990-01-31', 33);
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('sexysung', '87awjkdf', '성춘향', 'F', '1992-03-31', 31);
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('power70', 'qxur8sda', '변사또', 'M', '1970-05-02', 53);
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('hanjo', 'jk48fn4', '한조', 'M', '1984-10-18', 39);
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('widowmaker', '38ewifh3', '위도우', 'F', '1976-06-27', 47);
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('dvadva', 'k3f3ah', '송하나', 'F', '2001-06-03', 22);
+INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('jungkrat', '4ifha7f', '정크랫', 'M', '1999-11-11', 24);
+
+
+-- 실습
+-- 1. 몬든 회원목록을 가져오는데 ,이떄 birthday 컬ㄹ럼의 값을 기준으로 오름차순 정렬
+SELECT * FROM user3 ORDER BY birthday ASC;
+-- 2. 회원 목록 중 gender 컬럼의 값이 "M"인 회원목록을 가져오는데, 이때 name 컬럼의 값을 기준으로 내림차순 정렬
+SELECT * FROM user3 WHERE gender = 'M' ORDER BY name DESC;
+-- 3. 1990년대에 태어난 회원의 id, name 컬러믕ㄹ 가져와 목록으로 보여주싱
+SELECT id, name FROM user3 WHERE birthday Like '1990%';
+-- 4. 6월생 회원의 목록을 birthday 기준으로 오름차순 정렬하여 가져오시오
+SELECT * FROM user3 WHERE birthday LIKE '%06%' ORDER BY birthday ASC;
+-- 5. gender 컬럼의 값이 "M"이고 1970년대에 태어난 회원의 목록을 가져오시오;
+SELECT * FROM user3 WHERE gender = 'M' AND birthday LIKE '%1970%';
+-- 6. 모든 회원목록 중 AGE를 기준으로 내림차순 정렬하여 가져오는데, 그때 처음 3개의 레코드만 가져오시오.
+SELECT * FROM user3 ORDER BY age DESC LIMIT 3;
+-- 7. 모든 회원 목록 중 나이가 25 이상 50 이하인 회원의 목록을 출력하시오
+SELECT * FROM user3 WHERE age BETWEEN 25 AND 50;
+-- 8. ID 컬럼의 값이 HONG1234인 ㅔ코드의 PW 컬럼의 값을 12345678로 변경하시오
+UPDATE user3 SET pw = '12345678' WHERE id = 'hong1234';
+-- 9. id 컬럼의 값이 jungkrat인 레코드를 삭제하시오
+DELETE FROM user3 WHERE id = 'jungkrat';
+
 
 
 
@@ -191,3 +232,15 @@ UPDATE user2 SET address = "제주특별자치도 제주시", name = "이지현"
 -- delete에서도 where절이 항상 따라다니는 것이 바람직하다
 DELETE FROM user2 WHERE id = 11; -- id가 11인 사람의 데이터를 삭제
 DELETE FROM user2 WHERE id > 8;
+
+
+
+
+
+
+ -- ##########################################################
+ -- DCL 
+ -- Data COntrol Language : 데이터 제어어
+ -- 데이터베이스에 접근해 읽거나 쓰는 것을 제한할 수 있는 권한을 부여/박탈.(부여하기도 하고 박탈하기도 한다.)
+ -- GRANT: 특정 데이터베이스 사용자에게 특정 작업에 대한 수행 "권한 부여"
+ -- REVOKE : 특정 데이터베이스 사용자에게 특정 작업에 대한 수행 "꿘한 박탈"
