@@ -15,19 +15,13 @@ const realPw = '4321';
 //####################################################
 
 //MVC 패턴 적용
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index'); //index 생략가능.
 app.use('/', indexRouter); //indexRouter가 되면 localhost:post/ 경로를 기본으로 ./routes/index.js 파일에 선언한대로 동작한다.
 
 //######################################################
 
 
 
-
-
-
-
-
-//####################################################
 app.listen(PORT, function () {
   console.log(`http://localhost:${PORT}`);
 });

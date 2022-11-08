@@ -1,25 +1,26 @@
-const idpw = require('../model/idpw');
+const idpw = require('../model/idpw'); //controller로 가서 model을 불러온다.
 
 exports.main = (req, res) => {
     res.render('index');
 }
 
 
-// exports.practice30 = (req, res) => {
-//     console.log(req.body);
-//     console.log(req.body.userId);
-//     console.log(req.body.userPw);
+exports.practice30 = (req, res) => {
+    console.log(req.body); //req.body에는 {userId: 사용자가 입력한 값 , userPw : 사용자가 입력한 값} 이 저장되어 있다.
+    console.log(req.body.userId);
+    console.log(req.body.userPw);
 
-//     const infos = idpw.info();
+    const infos = idpw.info(); //가져온 파일(idpw라는 변수 이름에 idpw파일이 담겨있음)에 있는 info를 가져온다.
 
-//     console.log(infos);
+    console.log(infos);
   
-//     if (infos.realId === req.body.userId && infos.realPw === req.body.userPw) {
-//       res.send({ userInfo: req.body, isSuccess: true });
-//     } else {
-//       res.send({ isSuccess: false });
-//     }
-// }
+    //DB로부터 받아온 id pw(infos.realId)  VS 사용자가 폼에 입력한 id, pw(req.body.userId)를 비교.
+    if (infos.realId === req.body.userId && infos.realPw === req.body.userPw) {
+      res.send({ userInfo: req.body, isSuccess: true });
+    } else {
+      res.send({ isSuccess: false });
+    }
+}
 
 
 exports.practice30 = (req, res) => {
