@@ -18,6 +18,18 @@ exports.getVisitors = (req, res) => {
     })
 }
 
+
+exports.getVisitor = (req, res) => {
+    console.log(req.query); //GET은 query에 정보가 담겨있다.
+    console.log(req.query.id); //id 값 추출
+
+    Visitor.getVisitor(req.query.id, (result) => {
+        console.log("CVisitor.js", result);
+
+        res.send(result);
+    })
+}
+
 exports.postVisitor = (req, res) => {
     console.log(req.body);
 
@@ -35,6 +47,17 @@ exports.postVisitor = (req, res) => {
             comment: req.body.comment,
         })
     })
+}
+
+exports.patchVisitor= (req, res) => {
+    console.log(req.body);
+
+    Visitor.patchVisitor(req.body, (result) => {
+        console.log("CVisitor.js", result);
+
+        res.send('수정 성공!!');
+    })
+
 }
 
 exports.deleteVisitor = (req, res) => {

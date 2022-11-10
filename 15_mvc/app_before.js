@@ -2,10 +2,17 @@ const express = require('express');
 const app = express();
 const PORT = 8000;
 
-app.set('view engine', 'ejs');
-app.use('/views', express.static(__dirname + '/views'));
-app.use('/static', express.static(__dirname + '/static'));
-app.use(express.urlencoded({ extended: true }));
+/*
+const func_name = function () {
+    console.log('hello')
+}
+func_name();
+*/
+
+app.set('view engine', 'ejs'); //view 폴더에 있는 파일들의 형식이 ejs이다.
+app.use('/views', express.static(__dirname + '/views')); //절대경로
+app.use('/static', express.static(__dirname + '/static') ); //절대경로
+app.use(express.urlencoded({ extended: true })); // body-parser -> req.body를 쓸 수 있게 해주는 것.
 app.use(express.json());
 
 

@@ -1,0 +1,235 @@
+
+const tbody = document.querySelector('tbody');
+const buttonGroup = document.querySelector('#button-group');
+
+// 폼 [등록] 버튼 클릭시
+// - 테이블에 데이터 추가
+function createVisitor() {
+
+    console.log('click 등록 버튼');
+
+    // 폼 선택
+    const form = document.forms['visitor-form'];
+    console.dir(form);
+    console.log(form.name.value); // name input 값의 value
+    console.log(form.comment.value); // comment input 값의 value
+
+    if(!form.name.value.length){ //!0 -> !false -> true
+    alert('이름 기입!!');
+    clearInput();
+    return;
+    } 
+    
+    if(form.comment.value.length ===0){
+    alert('방명록 기입!!');
+    clearInput();
+    return;
+    }
+
+    if(form.name.value.length > 10){
+    alert('글자수를 맞게 입력해주세요');
+    clearInput();
+    return; 
+    } // if 끝
+    
+    //name input value의 길이가 10글자 이하일 때.
+    axios({
+    method: 'POST',
+    url: '/visitor/write',
+    data: {
+        name: form.name.value,
+        comment: form.comment.value,
+    },
+    })//axios 끝
+    .then((res) => {
+    console.log(res);
+    console.log(res.data);
+
+    return res.data;
+    })
+    .then((data) => {
+    console.log(data); // {id: 8, name: 'ㅁㅁ', comment: 'ㅁㅁ'}
+
+    const html = `
+    <tr id="tr_${data.id}">
+        <td>${data.id}</td>
+        <td>${data.name}</td>
+        <td>${data.comment}</td>
+        <td><button type="button" onclick = "editVisitor('${data.id}')">수정</button></td>
+        <td><button type="button" onclick="deleteVisitor(this, '${data.id}');">삭제</button></td>
+    </tr>`;
+
+    // 테이블에 추가된 정보를 "바로" 보여주기
+    // data 객체에 담긴 값을 이용해서 tbody 태그의 자식으로 tr 한줄이 추가되는 코드
+    // js: insertAdjacentHTML() -> 특정 요소에 html 코드 추가 가능
+    // vs. innerHTML(): 기존 html 코드 지우고 덮어씌움
+    // jquery: append()
+    tbody.insertAdjacentHTML('beforeend', html); // ver.js
+    // $('tbody').append(html); // ver. jquery
+
+    clearInput();
+    });
+
+} //function 끝
+
+
+
+
+// 테이블 내 [수정] 버튼을 클릭시
+//-form input에 각각 이름과 방명록 값을 넣기
+//-[변경], [취소] 버튼으로 대체 -> innerHTML
+async function editVisitor(id){
+
+    console.log("name 확인: " + name);
+    console.log("comment 확인: "+ comment);
+    
+    console.log('edit visitor!!');
+    console.log(id); //현재 행에 대한 id 값 출력
+
+    //-[변경], [취소] 버튼으로 대체 -> innerHTML
+    const html = `
+    <button type = "button" onclick = "editDo(${id})";>변경</button>
+    <button type = "button" onclick = "editCancel();";>취소</button>
+    `;
+
+    buttonGroup.innerHTML = html;
+
+    
+//-form input에 각각 이름과 방명록 값을 넣기
+//axios응답 결과를 result 변수에 담고자 한다.
+//왜냐하면 result변수에는 조회한 결과가 있다.
+//(result 변수에 한 명에 대한 정보가 담아야 하니까)
+//이 과정이 동기처리가 이루어져야 한다.
+//axios 처리를 기다렸다가 result 라는 변수에 담아야 한다(동기처리)
+//async/await
+//await를 만나서 프로미스가 처리될 때까지 기다려주게 한다.
+    let result = await axios({
+    method: 'GET',
+    url: `/visitor/get?id=${id}`,
+    }).then((res) =>{
+    console.log(res)
+    console.log("1 : ", res.data);
+    
+    return res.data;
+    })
+
+    console.log('2 : 방문자 하나 조회 결과: ' + result);
+    //result : {id: 19, name: '123', comment: '123'}
+
+    //폼선택
+    const form = document.forms['visitor-form'];
+    
+    //폼의 input에 "ㅁ=방문자 하나 조회 결과" 값을 각각 대입
+    form.name.value = result.name;
+    form.comment.value = result.comment;
+
+}
+
+
+//[변경] 버튼 클릭
+//-데이터 변경
+function editDo(id){
+
+    const form = document.forms['visitor-form'];
+
+    axios({
+    method: 'PATCH',
+    url: '/visitor/edit',
+
+    data:{
+        id: id,
+        name: form.name.value,
+        comment: form.comment.value
+    }
+
+    }) //axios 끝
+    .then((res) => {
+    console.log(res.data);
+
+    return res.data;
+    })
+    .then((data) => {
+    alert(data); //alert('수정 성공');
+
+    const children = document.querySelector(`#tr_${id}`).children; //배열 크기
+
+    children[1].textContent = form.name.value; //value 값 넣어준다.
+    children[2].textContent = form.comment.value; //comment value 값 넣어준다.
+
+    //[취소] 버튼 클릭시와 동일한 동작
+    //-input 초기화
+    editCancel();
+
+    const html = `
+    <button type="button" onclick = "createVisitor();">등록</button>
+    `;
+
+    buttonGroup.innerHTML = html;
+    
+    })
+
+
+
+} //function editDo 끝
+
+
+//[취소] 버튼 클릭시 
+//-input 초기화
+//-[등록] 버튼 보이기
+function editCancel(){
+    console.log('deit cancel');
+
+    //(1) input 초기화
+    clearInput();
+
+    //(2) 등록 버튼 보이기
+    const html = `<button type="button" onclick = "createVisitor();">등록</button>`
+    buttonGroup.innerHTML = html;
+}
+
+
+//[삭제] 버튼 클릭시
+//-테이블에서 해당 행 삭제
+function deleteVisitor(obj, id){
+
+    console.log("삭제버튼 연결");
+
+    console.log(obj);
+    console.log(id);
+    
+    let confirm_alert = confirm('삭제하시겠습니까?');
+    
+    if(!confirm_alert){
+        return;
+        
+    }
+
+    axios({
+        method: 'DELETE',
+        url: '/visitor/delete',
+        data: {
+            id: id,
+        }
+    }).then((res) => {
+        console.log(res.data);
+        
+        return res.data;
+    }).then(data => {
+        
+        //alert(data);
+
+        //obj : 삭제버튼 자기자신
+        obj.parentElement.parentElement.remove();
+
+        //closest() 메서드
+        //obj.closest(`#tr_${id}`).remove();
+    })
+
+}
+
+//input 초기화
+function clearInput(){
+    const form = document.forms['visitor-form'];
+    form.name.value = '';
+    form.comment.value = '';
+}

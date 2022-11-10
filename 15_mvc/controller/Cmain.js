@@ -51,6 +51,8 @@ exports.comment = (req, res) => {
 
 
 const Comment = require('../model/Comment');
+console.log(Comment)
+console.log(Comment.commentInfos())
 
 // const comments = [ {}, {}, {}, {} ];
 exports.main = (req, res) => {
@@ -58,6 +60,7 @@ exports.main = (req, res) => {
 };
 
 exports.comments = (req, res) => {
+  console.log('testset')
   // console.log(comments) // [ {}, {}, {}, {} ]
   console.log(Comment.commentInfos()); // 댓글 목록 확인용: [ {}, {}, {}, {} ]
   // { commentInfos: [ {}, {}, {}, {} ]}

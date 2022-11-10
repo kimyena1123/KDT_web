@@ -39,11 +39,22 @@ exports.getVisitors = (callback) => {
     })
 };
 
+exports.getVisitor = (id, callback) => {
+    conn.query(`SELECT * FROM visitor WHERE id = ${id}`, (err, rows) => {
+        if(err){
+            throw err;
+        }
+
+        console.log("Visitor.js", rows);
+        callback(rows[0]);
+    })
+}
+
 // 사용자가 input창에 입력한 사용자이름과, 방명록 추가
 exports.postVisitor = (data, callback) => {
     conn.query(
         // `INSERT INTO visitor (name, comment) VALUES ('홍길동', '내가 왔다')`,
-        `INSERT INTO visitor (name, comment) VALUES ('${data.name}', '${data.comment}')`,
+        `INSERT INTO visitor (name, comment) VALUES ('${data.name}' AND '${data.comment}')`,
 
         (err, rows) => {
             if(err){
@@ -55,6 +66,21 @@ exports.postVisitor = (data, callback) => {
         }
     )
 }
+
+
+exports.patchVisitor = (data, callback) => {
+    conn.query(
+      `UPDATE visitor SET name='${data.name}', comment='${data.comment}' WHERE id=${data.id}`,
+      (err, rows) => {
+        if (err) {
+          throw err;
+        }
+  
+        console.log('Visitor.js', rows);
+        callback(true); // true: 수정 성공을 의미
+      }
+    );
+  };
 
 
 //해당 삭제
@@ -74,5 +100,7 @@ exports.deleteVisitor = (id, callback) => {
             //callback(true); //삭제성공을 의미
             callback(true);
 
-        })
+     })
 }
+
+// [ {}, {}. {}. P{}] select userid from user;

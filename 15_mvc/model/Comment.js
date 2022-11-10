@@ -2,7 +2,7 @@
 //배열 : 전체 댓글
 //각 객체: 댓글 하나
 exports.commentInfos = () => {
-    return { //DB에서 가져온 값은 있어선 안된다.
+    return [{ //DB에서 가져온 값은 있어선 안된다.
         id: 1,
         userid: 'helloworld',
         date: '2022-10-31',
@@ -25,5 +25,5 @@ exports.commentInfos = () => {
         userid: 'id4',
         date: '2022-11-02',
         comment: '아오 ^~^'
-    }
+    }]
 }

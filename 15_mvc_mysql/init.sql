@@ -22,13 +22,18 @@ CREATE TABLE visitor(
 DESC visitior;
 
 SELECT * FROM visitor;
+SELECT * FROM visitor WHERE id = 1;
 
 
 INSERT INTO visitor (name, comment) VALUES ('홍길동', '내가 왔다');
 INSERT INTO visitor (name, comment) VALUES ('이찬혁', '으라차차');
 INSERT INTO visitor (name, comment) VALUES ('김예나', '코딩온');
 
+--테이블 데이터 삭제(delete)
+DELETE FROM visitior WHERE id > 2;
 
+--테이블 데이터 수정(update)
+UPDATE visitor SET name = '누구' , comment = "아무말" WHERE id = 1;
 
 -- DCL
 -- mysql 사용자 추가(user계정)
