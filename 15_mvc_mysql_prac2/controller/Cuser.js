@@ -39,7 +39,7 @@ exports.postSignin = (req, res) => {
     console.log(req.body.pw);
 
     User.postSignin(req.body, (result) => {
-        console.log('CUser.js >>', result); // {} 
+        console.log('CUser.js 로그인 성공실패 확인>>', result); // {} 
 
         /*
         if(result == undefined){
@@ -51,9 +51,11 @@ exports.postSignin = (req, res) => {
 
         /*아니면 이 방식도 있다*/
         if(result.length > 0){ // 성공
+            //[ RowDataPacket { id: 29, userid: 'a', name: 'a', pw: 'a' } ]
            res.send(true);
         }
         else{ //실패
+            //CUser.js 로그인 성공실패 확인>> []
             res.send(false);
         }
        

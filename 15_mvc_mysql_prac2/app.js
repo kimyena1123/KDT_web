@@ -11,7 +11,6 @@ app.use(express.json());
 // TODO: 라우팅 분리
 // 기본 주소: localhost:PORT/user <- 주의!!
 const indexRouter = require('./routes/user');
-
 app.use('/user', indexRouter);
 
 app.get('*', (req, res) => {

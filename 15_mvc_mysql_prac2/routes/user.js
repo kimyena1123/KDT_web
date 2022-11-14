@@ -28,7 +28,8 @@ router.post('/profile', controller.postProfile);
 //POST /user/profile/edit
 router.post('/profile/edit', controller.postProfileEdit);
 
-router.post('/profile/delete', controller.postProfileDelete);
+
+
 
 
 module.exports = router;
