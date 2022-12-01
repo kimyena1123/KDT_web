@@ -14,16 +14,16 @@
     <a href="/">HOME</a>
     <p>ID 수정 불가능, Password, Name 수정 가능</p>
     <form name="form_profile">
-      <label for="userid">ID</label>
       <input type="hidden" id="id" value="<%= data.id %>" />
       
       <!-- readonly: userid는 수정 불가능 (조건임) -->
+      <label for="userid">ID</label>
       <input id="userid" type="text" name="userid" value="<%= data.userid %>" readonly/><br />
+
       <label for="password">Password</label>
-
       <input id="password" type="password" name="pw" value="<%= data.pw %>" required/><br />
-      <label for="name">Name</label>
 
+      <label for="name">Name</label>
       <input id="name" type="text" name="name" value="<%= data.name %>" required/><br />
 
       <button type="button" onclick="profileEdit();">Edit</button>

@@ -3,12 +3,16 @@ const controller = require("../controller/Cuser"); //controller폴더에 있는 
 const router = express.Router();
 
 router.get('/', controller.main);
-router.get('/signup', controller.getSignup);
 
+//   /user/signup
+router.get('/signup', controller.getSignup);
 router.post('/signup', controller.postSignup);
+
+//   /user/signin
 router.get('/signin', controller.getSignin);
 router.post('/signin', controller.postSignin);
 
+//   /user/profile
 router.post('/profile', controller.postProfile);
 router.post('/profile/edit', controller.postProfileEdit);
 router.post('/profile/delete', controller.postProfileDelete);

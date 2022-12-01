@@ -9,6 +9,8 @@ const path = require('path');
 const upload = multer({
     dest: 'uploads/', //저장경로
 });
+
+
 const upleadDetail = multer({
     storage: multer.diskStorage({
         destination(req, file, done){
@@ -107,10 +109,7 @@ app.post('/upload/fields', upleadDetail.fields([{name: 'userfile1'}, {name: 'use
 
 
 // 4. 동적 파일 업로드
-app.post(
-  '/dynamicFile',
-  upleadDetail.single('dynamicFile'),
-  function (req, res) {
+app.post('/dynamicFile',upleadDetail.single('dynamicFile'), function (req, res) {
     console.log(req.file);
     res.send(req.file);
   }

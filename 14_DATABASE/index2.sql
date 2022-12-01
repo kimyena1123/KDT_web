@@ -109,7 +109,7 @@ FROM customer
 
 
 
--- 우저아이디를 기준으로 customer와 orderlist 조인(일부 컬럼이름에 별명을 붙여 조건을 만족하는 행 보기)
+-- 유저아이디를 기준으로 customer와 orderlist 조인(일부 컬럼이름에 별명을 붙여 조건을 만족하는 행 보기)
 SELECT orderlist.id as order_id, customer.id as user_id, orderlist.product_name, orderlist.quantity -- 별명을 붙여준다.
 FROM customer
 	INNER JOIN orderlist

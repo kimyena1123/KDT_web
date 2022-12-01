@@ -46,7 +46,7 @@ exports.getSignin = (req, res) => {
 // }
 
 exports.postSignin = (req, res) => {
-    /*
+    
     console.log(req.body);
     console.log(req.body.userid);
     console.log(req.body.pw);
@@ -54,7 +54,7 @@ exports.postSignin = (req, res) => {
     User.postSignin(req.body, (result) => {
         console.log('CUser.js >>', result); // {} 
 
-        /*
+        
         if(result == undefined){
             res.send(false);
         }
@@ -62,7 +62,7 @@ exports.postSignin = (req, res) => {
             res.send(true);
         }
 
-        아니면 이 방식도 있다
+        //아니면 이 방식도 있다
         if(result.length > 0){ // 성공
            res.send(true);
         }
@@ -70,9 +70,9 @@ exports.postSignin = (req, res) => {
             res.send(false);
         }
        
-    })*/
+    })
 
-
+/*
     //SELECT * FROM user WHERE userid = '${data.userid}' AND pw = '${data.pw}' LIMIT 1
     models.User.findOne({
         where: {
@@ -89,7 +89,7 @@ exports.postSignin = (req, res) => {
         else{
             res.send(true);
         }
-    })
+    })*/
 
 }
 
@@ -141,7 +141,7 @@ exports.postProfileEdit = (req, res) => {
 
     //UPDATE user SET name = '${data.name}', userid = '${data.userid}', pw = '${data.pw}' WHERE id = '${data.id}'`,
     models.User.update({
-        name: req.body.name,
+        name: req.body.name, //req.body = data
         userid: req.body.userid,
         pw: req.body.pw,
     },
@@ -153,9 +153,6 @@ exports.postProfileEdit = (req, res) => {
 
         res.send('수정 성공');
     })
-
-    
-
 }
 
 exports.postProfileDelete = (req, res) => {
