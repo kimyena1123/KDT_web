@@ -20,9 +20,6 @@ app.get('/', (req, res) => {
 //유저 목록 업데이트
 function updateList(){
   io.emit('updateNicks', nickArray); // "모두에게" 유저목록. {socket.id : nick1, socket.id : nick2, ...}
-
-  
-
 }
 
 // io.on()
