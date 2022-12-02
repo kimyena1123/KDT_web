@@ -22,6 +22,8 @@ class ClassComponent extends React.Component{
 
     static defaultProps = {
         name: '기본이름',
+        students: 1,
+
     }
     static propTypes = {
         name: PropTypes.string,
