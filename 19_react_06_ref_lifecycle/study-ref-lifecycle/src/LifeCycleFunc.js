@@ -1,10 +1,15 @@
 import {useState, useEffect} from 'react';
 
 //자식 컴포넌트
-const MyComponent = (props) => {
+const MyComponent = (props) => { //mount 될 때만 실행.
+
     const {number} = props; // props는 부모롤부터 데이터를 전달받는다.
     //자식이 props 구조분해할당으로 가져오고 있다.
 
+    const [text, setText] = useState('');
+
+
+    
     useEffect(() => {
         console.log('🙆 mout!');
 
@@ -15,14 +20,25 @@ const MyComponent = (props) => {
         }
     }, []); //mount 될 때만 동작하도록
 
-    //mount & Unmout 시점에 실행(mount와 unmount 동시에!)
-    useEffect(() => {
-        console.log('🔆 update!'); //맨 처음 mount 될 떄도 실행된다.
+
+    
+
+    //mount & update 시점에 실행(mount와 unmount 동시에!)
+    useEffect(() => { // 잘 안쓰이는 방법
+        console.log('😃😃😃update!'); //맨 처음 mount 될 떄도 실행된다.
     })
+
+
+
+
+    useEffect(() => {
+        console.log('🙌🙌🙌 only text state update >>> ', text);
+    }, [text]) //[text]가 바뀔 때만 실행된다.
 
     return(
         <>
             <p>MyComponent {number}</p>
+            <input type = "text" value = {text} onChange = {(e) => setText(e.target.value)}></input>
         </>
     )
 }
