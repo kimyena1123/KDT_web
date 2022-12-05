@@ -29,7 +29,7 @@ const Alphabet = () => {
         const result = alphabets.filter((a) => a.id !== id); 
         setAlphabets(result);
     }
-    
+     
     return(
         <div>
             <input type = "text" value = {inputAlpha} onChange = {(e) => setInputAlpha(e.target.value)} />
