@@ -28,6 +28,7 @@ const Prac52 = () => {
 
     return(
         <div>
+            <form action="tables">
             <label for = "user_name">작성자 : </label>
             <input type = "text" id = "user_name" value = {inputName} onChange = {(e) => setInputName(e.target.value)}></input>
 
@@ -35,6 +36,7 @@ const Prac52 = () => {
             <input type = "text" id = "title" value = {inputTitle} onChange = {(e) => setInputTitle(e.target.value)}></input>
 
             <button onClick = {addTable}>작성</button>
+            </form>
 
             <table>
                 <thead>
@@ -48,10 +50,10 @@ const Prac52 = () => {
                     {tables.map((a) => {
                         //즉, a = {id: 0, title: 'title1', user: 'user1'}
                         return(
-                            <tr onDoubleClick={() => {deleteTable(a.id);}}>
-                                <td key = {a.id}>{a.id}</td>
-                                <td key = {a.id}>{a.user}</td>
-                                <td key = {a.id}>{a.title}</td>
+                            <tr key = {a.id} onDoubleClick={() => {deleteTable(a.id);}}>
+                                <td>{a.id}</td>
+                                <td>{a.user}</td>
+                                <td>{a.title}</td>
                             </tr>
                         )
                     })}
