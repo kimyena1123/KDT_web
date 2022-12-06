@@ -1,0 +1,53 @@
+@import './utils.scss';
+
+
+.Sass{ //부모
+    display: flex;
+
+    .box{ //자식
+        // width: $box-size;
+        // height: $box-size;
+        @include box($box-size);
+        //@include box(120px);
+        //@include box(120px, 150px);
+        
+        //중첩 안에서 &: 부모 선택자 참조하여 치환
+        //& = .box 라고 생각하면된다.
+        &.red{ // &.red = .box .red
+            background-color: $color--red;
+        }
+        &.orange{ // .box .orange
+            background-color: $color--orange;
+        }
+        &.yellow{ // .box. yellow
+            background-color: $color--yellow;
+        }
+        &.green{ // .box .green
+            background-color: $color--green;
+        }
+        &.blue{
+            background-color: $color--blue;
+        }
+        &.indigo{
+            background-color: $color--indigo;
+        }
+        &.purple{
+            background-color: $color--purple;
+        }
+
+        &:hover{
+            //변수선언
+            $this-animation: $animation-duration * 2;
+
+            cursor: pointer;
+            transform: translateY(-50px);
+            transition: transform $this-animation;
+        }
+    }//.box
+}//.Sass
+
+@media (max-width: #{$breakpoint-md}){
+    .Sass{
+        flex-direction: column-reverse;
+    }
+}

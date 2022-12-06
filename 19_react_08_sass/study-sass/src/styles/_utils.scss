@@ -1,0 +1,27 @@
+
+//COLOR
+$color--red: red;
+$color--orange: orange;
+$color--yellow: yellow;
+$color--green: green;
+$color--blue: blue;
+$color--indigo: indigo;
+$color--purple: purple;
+$color--black: black;
+
+
+//BREAKPOINT
+$breakpoint-md: 768px;
+
+
+//SIZE
+$box-size: 120px;
+
+//ANIMATION
+$animation-duration: 0.4s;
+
+@mixin box($size){
+    width: $size;
+    height: $size;
+    border: 2px solid $color--black;
+}

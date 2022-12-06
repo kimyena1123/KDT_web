@@ -1,0 +1,72 @@
+.App {
+    text-align: center;
+  }
+  
+  /* PostList, PostItem. */
+  
+  :root {
+    --height-header: 80px;
+    --color-blue: rgb(119, 164, 255);
+    --color-white: rgb(255,255,255);
+    --color-gray: rgb(123,123,123);
+    --color-lightblue: rgb(243, 247, 255);
+    --shadow-black: rgba(0, 0, 0, 0.15);
+  }
+  
+  *{
+    box-sizing: border-box;
+  }
+  
+  .PostList header{
+    height: var(--height-header);
+    line-height: var(--height-header);
+  
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    text-shadow: 2px 2px 4px var(--shadow-black);
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  /*PostItem*/
+  .PostItem{
+    width: 50%;
+    background-color: var(--color-lightblue);
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px var(--shadow-black);
+    padding: 20px 30px;
+    text-align: left;
+  }
+  
+  .PostItem:hover{
+    cursor: pointer;
+    transform: translateY(-10px);
+    transition: transform 0.4s;
+  }
+  
+  .PostItem:hover .id,
+  .PostItem:hover .title{
+    font-weight: 700;
+  }
+  
+  .PostItem .id{
+    font-weight: 500;
+    margin-right: 8px;
+    color: var(--color-blue);
+  }
+  
+  .PostItem .title{
+    color: var(--color-gray);
+  
+  }
+  .PostItem .body{
+    font-size: 20px;;
+  }
+  
+  /* 최대너비가 768 */
+  @media (max-width: 769px){
+    .PostItem{
+      width: 90vw;
+    }
+  }

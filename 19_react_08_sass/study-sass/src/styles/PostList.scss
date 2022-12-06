@@ -1,0 +1,55 @@
+@import './PostList.scss';
+
+*{
+    box-sizing: border-box;
+}
+
+// PostList
+.PostList{
+    text-align: center;
+
+    header{
+        height: $height-header;
+        line-height: $height-header;
+    
+        background-color: $color--blue;
+        color: $color--white;
+        text-shadow: $shadow--black;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    //PostItem
+    .PostItem{
+        text-align: left;
+        width: 50%;
+        background-color: $color-ligntblue;
+        margin: 40px auto;
+        padding: 20px 20px;
+        border-radius: 10px;
+        box-shadow: $shadow--black;
+
+        &:hover{
+            cursor: pointer;
+            transform: translateY(-10px);
+            transition: transform 0.4s;
+        }
+        &:hover .id, &:hover .title{
+            font-weight: 700;
+        }
+        & .id{
+            font-weight: 500;
+            margin-right: 8px;
+            color: $color--blue;
+        }
+        & .body{
+            font-size: 20px;
+        }
+    }
+    @media (max-width: 769px){
+        .PostItem{
+          width: 90vw;
+        }
+      }
+    
+}

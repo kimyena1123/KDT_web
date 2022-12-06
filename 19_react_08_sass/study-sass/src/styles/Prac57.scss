@@ -1,0 +1,109 @@
+
+$animation-duration: 0.4s;
+.Prac57{
+    margin-top: 400px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .circle{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        border-radius: 50%;
+        
+
+        &.circle1{
+            background-color: pink;
+
+            animation-name: right1;
+            animation-duration: 2s;
+        }
+        &.circle2{
+            background-color: yellow;
+            animation-name: right2;
+            animation-duration: 2s;
+        }
+        &.circle3{
+            background-color: green;
+            animation-name: right3;
+            animation-duration: 2s;
+        }
+    }
+}
+
+
+
+
+@keyframes right1{
+    0%{
+        transform: translate(0px, 0px);
+        // left : 0px;
+        // top : 0px;
+    }
+    25%{
+        transform: translate(30px, 0px);
+        // left : 300px;
+        // top : 0px;
+    }
+    50%{
+        transform: translate(30px, 30px);
+    }
+    75%{
+        transform: translate(0px, 30px);
+        left : 0px;
+        top : 300px;
+    }
+    100%{
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes right2{
+    0%{
+        transform: translate(0px, 0px);
+        // left : 0px;
+        // top : 0px;
+    }
+    25%{
+        transform: translate(50px, 0px);
+        // left : 300px;
+        // top : 0px;
+    }
+    50%{
+        transform: translate(50px, 50px);
+    }
+    75%{
+        transform: translate(0px, 50px);
+        left : 0px;
+        top : 300px;
+    }
+    100%{
+        transform: translate(0px, 0px);
+    }
+}
+
+@keyframes right3{
+    0%{
+        transform: translate(0px, 0px);
+        // left : 0px;
+        // top : 0px;
+    }
+    25%{
+        transform: translate(100px, 0px);
+        // left : 300px;
+        // top : 0px;
+    }
+    50%{
+        transform: translate(100px, 100px);
+    }
+    75%{
+        transform: translate(0px, 100px);
+        left : 0px;
+        top : 300px;
+    }
+    100%{
+        transform: translate(0px, 0px);
+    }
+}
