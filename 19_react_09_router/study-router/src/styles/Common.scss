@@ -1,0 +1,60 @@
+
+*{
+    margin: 0;
+}
+
+.Header{
+    background-color: #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+
+    .menu-item{
+        margin: 0 8px;
+    }
+}
+.MainPage{
+    background-color: rgb(225, 223, 229);
+    min-height: 100vh;
+
+    &.Dark{
+        background-color: #333;
+        color: white;
+    }
+}
+
+.ProductPage{
+    border: 2px solid black;
+    background-color: rgb(226, 203, 255);
+    min-height: 100vh;
+    .ProductList{
+        border: 2px solid red;
+
+        & .ProductItem{
+            border: 2px solid blue;
+            background-color: white;
+            text-decoration: none;
+            color: black;
+            
+            ul{
+                width: 80vw;
+                margin: 30px auto 0 auto;
+            }
+            
+            & :hover{
+                font-weight: 700;
+            }
+
+        }
+    }
+
+}
+.ProductDetailPage{
+    background-color: rgb(238, 139, 139);;
+    min-height: 100vh;
+}
+.NotFound{
+    background-color:  rgb(176, 175, 175);
+    min-height: 100vh;
+}
