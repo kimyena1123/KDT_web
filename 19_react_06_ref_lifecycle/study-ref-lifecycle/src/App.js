@@ -8,7 +8,8 @@ import './App.css';
 //import LifeCycleFunc from './LifeCycleFunc';
 //import LifeCycleClass from './LifeCycleClass';
 
-import PostList from './PostList';
+//import PostList from './PostList';
+import Prac55 from './Prac55';
 
 
 
@@ -31,9 +32,11 @@ function App() {
       <LifeCycleFunc />
       <hr></hr>
       <LifeCycleClass/>
-  <hr></hr>*/}
-
-      <PostList/>
+      <hr></hr>
+      <PostList/>*/}
+      <hr></hr>
+      <h1>실습55번 다시 보기</h1>
+      <Prac55 />
     </div>
   );
 }
