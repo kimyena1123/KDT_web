@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>socket을 이용한 채팅 기능 구현</title>
+
+     <!-- socket.io cdn -->
+     <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+
+     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .entry-box{
+            display: flex;
+            justify-content: center;
+        }
+        .chat-box{
+            width: 36%;
+            height: 500px;
+            padding: 10px;
+            margin: 0 auto;
+            border: 2px solid black;
+        }
+        .chat-list{
+            background-color: #E2DCFE;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+        .my-chat{
+            display: flex;
+            justify-content: end;
+        }
+        .my-text{
+        }
+        .my-chat .my-msg p{
+            background-color: #8E78FF;
+            color: white;
+            display: inline-block;
+            padding: 3px;
+        }
+        #my-info{
+            display: flex;
+        }
+        .my-nick{
+            display: flex;
+            justify-content: end;
+            font-size: 12px;
+        }
+        #my-info #my-img{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+        }
+        .other-chat{
+            display: flex;
+            justify-content: start;
+        }
+        .other-text{
+        }
+        .other-chat .other-msg p{
+            background-color: white;
+            color: #7f66fd;
+            display: inline-block;
+            padding: 3px;
+        }
+        #other-info{
+            display: flex;
+            flex-direction: column;
+        }
+        .other-nick{
+            display: flex;
+            justify-content: start;
+            font-size: 12px;
+        }
+        #other-info #other-img{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+        }
+        
+        
+        .notice{
+            text-align: center;
+            color: navy;
+            font-size: 12px;
+        }
+        #text{
+            margin: 2px 0;
+        }
+        .d-none{
+            display: none;
+        }
+        
+     </style>
+</head>
+<body>
+    
+    <div class = "entry-box">
+        <input type = "text" id = "nickname" placeholder = "닉네임" autofocus />
+        <button type = "button" onclick = "entry();">입장</button>
+    </div>
+
+    <div class = "chat-box d-none">
+        <div id = "chat-list" class = "chat-list">
+            <!-- 임시 대화 데이터 -->
+            
+        <!-- <div class = "my-chat">
+                
+                <div class = "my-text">
+                    <div class = "my-nick"><span>Me</span></div>
+                    <span class = "msg my-msg"><p>msg1</p></span>
+                </div>
+
+                <div id = "my-info">
+                    <img id="my-img" src = "" alt = "1">
+                </div>
+            </div>
+
+            <div class = "other-chat">
+                <div id = "other-info">
+                    <img id = "other-img" src = "" alt = "2">
+                </div>
+                
+                <div class= "other-text">
+                    <div class = "other-nick">상대방</div>
+                    <span class = "msg other-msg"><p>msg2</p></span>
+                </div>
+            </div>
+
+            <div class = "notice">xxx가 입장했습니다.</div> -->
+        </div>
+
+        <div id = "text">
+            <select id = "nick-list">
+                <option value = "all">전체</option>
+                <option value = "socketId1">nick1</option>
+                <option value = "socketId2">nick2</option>
+            </select>에게
+
+            <input type = "text" id = "message">
+            <button type = "button" onclick = "send();">전송</button>
+        </div>
+    </div>
+
+    <script>
+        let socket = io.connect(); // 소켓 사용을 위한 객체 생성
+        let myNick; // 내 닉네임 설정
+
+        socket.on('connect', () => { // 서버와 클라이언트가 서로 연결이 되었을 때
+            console.log('***client socket connected***', socket.id);
+        });
+
+        //[실습44]
+        socket.on('notice', (msg) => {
+            console.log('socket.on notice >> ', msg);
+
+            //아래코드에서의 ${msg}는 = `${socket.id.slice(0,5)}님이 입장하셨습니다.`);를 의미.
+            //document.querySelector('#chat-list').insertAdjacentElement('beforeend', `<div class = "notice">${msg}</div>`);
+        });
+
+        //실습[44-2] 채팅창 입장 안내 문구 socket.io -> nickname
+        function entry(){
+            //위 body 태그 안에서 선언한 input태그
+            //사용자가 input 태그에 자신의 nickname을 적고, 그 값(#input태그, value)을 서버에 보낸다.
+            //그럼 서버는 그 nickname을 받아 중복이 있는지 확인 후 중복되지 않는다면
+            //nickname을 화면에 출력하도록 한다.
+            console.log(document.querySelector('#nickname').value);
+
+            //socket.emit이 보내는 건 -> socket.on('setNick, (nick) => {}로 받는다.')
+            //document.queyrSelector('#nickname').value = nick
+            socket.emit('setNick', document.querySelector('#nickname').value);
+        }
+        
+        //'error' 이벤트 받기 -> on
+        socket.on('error', (data) => {
+            alert(data);
+        })
+
+
+        
+        socket.on('entrySuccess', (nick) => {
+            console.log(nick);
+            myNick = nick; //백으로 받은 nick을 myNick에 저장.
+
+            //입장에 성공하면 입장을 제한 -> 비활성화
+            document.querySelector('#nickname').disabled = true;
+
+            //[입장] 버튼 비활성화
+            document.querySelector('.entry-box > button').disabled = true;
+
+            //채팅박스 보여줌
+            //닉네임이 입력되어야 채팅박스가 보여지도록함
+            document.querySelector('.chat-box').classList.remove('d-none');
+        })
+
+
+        //[실습45] 채팅창 메세지 전송 step1
+        function send(){
+
+            const data = {
+                myNick: myNick, // myNick에는 nick이 들어있다. "entrySuccess" 이벤트에서 입장 성공시 설정한 내 닉네임
+                msg: document.querySelector("#message").value,
+                dm: document.querySelector('#nick-list').value, // 현재 선택된 select 태그의 option 값 // dm 여부
+            }
+
+            console.log('dm >> ', data.dm);
+
+            socket.emit('send', data); // data 정보를 서버로 보내준다.
+        }
+        
+        //[실습45] 채팅창 메세지 전송 step2
+        //"newMessage" 이벤트 전달받기(닉네임, 메세지 내용)
+        socket.on('newMessage', (data) => { //여기서 data는 {nick: data.myNick, msg: data.msg};
+            console.log('socket on newMessage >> ', data);
+
+            /*
+            <div class = "my-chat"> // chatDiv
+                
+                <div class = "my-text"> //textDiv
+                    <div class = "my-nick"> //nickDiv
+                        <span>Me</span> //spanName 
+                    </div>
+
+                    <span class = "msg my-msg"> //msgSpan
+                        <p>msg1</p> //pmsg
+                    </span>
+                </div>
+            </div>
+            */
+
+            let chatList = document.querySelector('#chat-list');
+            
+            let chatDiv = document.createElement('div');
+            let textDiv = document.createElement('div');
+            let nickDiv = document.createElement('div');
+            let spanName = document.createElement('span');
+            let msgSpan = document.createElement('span');
+            let pmsg = document.createElement('p');
+
+            //새 메세지(data => {nick 'a' msg : 'hello'})가 도착했는데
+            //myNick에 저장된 현재 내 닉네임과
+            //새 메세지(data)이 nick이 같다면, 내가 보낸 채팅
+            //새 메세지(data)의 nick과 다르면, 상대방이 보낸 채팅
+
+            msgSpan.classList.add('msg');
+
+            if(myNick == data.nick){
+                spanName.textContent = spanName.textContent + 'Me';
+                chatDiv.classList.add('my-chat');
+                textDiv.classList.add('my-text');
+                nickDiv.classList.add('my-nick');
+                msgSpan.classList.add('my-msg');
+                
+
+            }else{ //내가 보낸 것과 닉네임이 다르다면 다른 사람이 보낸 채팅.
+                spanName.textContent = spanName.textContent + `${data.nick}`;
+                chatDiv.classList.add('other-chat');
+                textDiv.classList.add('other-text');
+                nickDiv.classList.add('other-nick');
+                msgSpan.classList.add('other-msg');
+            }
+
+            //[실습46] DM 기능 추가
+            console.log('send data check >> ', data);
+            //dm : {nick: 'a', msg: 'xx', dm: (속닥속닥)}
+            //전체: {nick: 'a', msg: 'xx'}
+
+            if(data.dm){
+                //data.dm이 있다면
+                div.classList.add('secret-chat'); //css 적용을 위해서
+                pChat.textContent = data.dm; //data.dm = "(속닥속닥)"
+            }
+
+            //spanName.textContent = spanName.textContent + `${data.nick}`;
+            pmsg.textContent = pmsg.textContent + `${data.msg}`;
+
+            chatList.append(chatDiv);
+            chatDiv.append(textDiv);
+            textDiv.append(nickDiv);
+            textDiv.append(msgSpan);
+
+            nickDiv.append(spanName);
+            msgSpan.append(pmsg);
+
+            chatList.scrollTop = chatList.scrollHeight;
+        })
+
+        //엔터키 치면 채팅문자 등록
+        document.getElementById('message').addEventListener('keydown', function(event){
+            if(event.keyCode == 13){
+                send();
+
+                document.querySelector('#message').value = "";
+            }
+        });
+
+        //[실습46] DM기능 추가 
+        //특정 사람에게만 메시지를 보낼 수 있도록 하는 DM 기능.
+    </script>
+</body>
+</html>
