@@ -5,16 +5,56 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http); // http-socket 연결
 const PORT = 8000;
 
+//multer 설정
+const multer = require('multer');
+const path = require('path');
+
+const upleadDetail = multer({
+    storage: multer.diskStorage({
+        destination(req, file, done){
+            //req: 요청에 대한 정보
+            //file: 파일에 대한 정보
+            //done(에러, 저장경로): 함수
+            done(null, 'uploads/'); //경로 설정. 위에 dest와 같은 파일에
+        },
+        filename(req, file, done){
+            //req: 요청에 대한 정보
+            //fiile: 파일에 대한 정보
+            //done: 함수
+
+            const ext = path.extname(file.originalname); //file.originalname에서 "확장자" 추출하는 과정
+
+            //test
+            console.log("test!!!!!!:" + file.originalname);
+            console.log(ext);
+            console.log("basename : " + path.basename(file.originalname, ext));
+            console.log("아이디로 붇이기: " + req.body.id);
+
+            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+           // done(null, path.basename(req.body.id, ext) + Date.now() + ext);
+            //[파일명+현재시간.확장자] 이름으로 바꿔서 파일 업로드하는 코드
+            //현재시간 붙이는 이유: 파일명이 겹치는 것을 막기 위함이다.
+        }
+    }),
+   // limits:{fileSize: 5 * 1024 * 1024},
+})
+
 app.set('view engine', 'ejs');
 app.use('/views', express.static(__dirname + '/views'));
-
-const nickArray = { //유저목록
-
-};
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use('/uploads', express.static(__dirname + '/uploads')); 
 
 app.get('/', (req, res) => {
     res.render('chat');
 });
+
+const nickArray = { //유저목록
+};
+
+function updateList() {
+    io.emit('updateNicks', nickArray, Object.keys(nickArray).length); // {socket.id: nick1, socket.id: nick2, ...}
+};
 
 //io.on()
 // : socket과 관련된 통신작업을 처리
@@ -47,9 +87,9 @@ io.on('connection', (socket) => {
         //{socket.id1 : nick1, socket.id2 : nick2, ...}
 
         io.emit('notice', `${nick}님이 입장하셨습니다.`); //socket.on('notice', (msg) => {
-        socket.emit('entrySuccess', nick); //socket.on('entrySuccess', (nick) => {
+        socket.emit('entrySuccess', nick, Object.keys(nickArray).length); //socket.on('entrySuccess', (nick) => {
         
-        //updateList(); //유저목록 업데이트
+        updateList(); //유저목록 업데이트
     }
     });
 
@@ -69,13 +109,12 @@ io.on('connection', (socket) => {
     //3. nickArray에서 해당 유저 삭제
     delete nickArray[socket.id];
 
-    //updateList(); // 객체에서 해당 유저가 퇴장했을 때, 연결을 끊겼을 때 유저목록 "업데이트"해서 다시 알려준다.
+    updateList(); // 객체에서 해당 유저가 퇴장했을 때, 연결을 끊겼을 때 유저목록 "업데이트"해서 다시 알려준다.
   })
 
   
 
     socket.on('send', (data) => { //socket.emit('send', data);
-
         // front에서 받은 data 정보
         console.log('socket on send >> ', data); //{myNick: 'a', msg: 'cc', dm: '전체|특정닉네임'}
 
@@ -84,13 +123,26 @@ io.on('connection', (socket) => {
 
         //전체를 선택하지 않았다면 -> dm
         if(data.dm !== 'all'){ // "전체"가 아니라면 => 특정 유저라면
+            console.log('front에서 받은 dm  확인 >> ', data.dm);
+            console.log('front에서 받은 myNick 확인 >> ', data.myNick);
+            console.log('front에서 받은 menick 확인 >> ', data.menick);
+
+
+
+
+            
+            console.log('*****************************')
             let dmSocketId = data.dm; // 특정 유저의 socket id
-            const sendData = {nick: data.myNick, msg: data.msg, dm: '(속닥속닥)'};
-
+            const sendData = {nick: data.myNick, msg: data.msg, dm: '(속닥속닥)', you: data.dm};
+            
+            
             io.to(dmSocketId).emit('newMessage', sendData); // 특정 소켓 아이디에게만 메세지 전송
-
             socket.emit('newMessage', sendData); //자기 자신에게도 dm 메세지 전송
+            
+
+
         }else{
+
             //전체 메세지 전송
              // [실습45] 채팅창 메세지 전송 Step2
 
@@ -104,7 +156,11 @@ io.on('connection', (socket) => {
     });
 });
 
-
+app.post('/dynamicFile',upleadDetail.single('dynamicFile'), function (req, res) {
+    console.log(req.file);
+    res.send(req.file);
+  }
+);
 
 
 

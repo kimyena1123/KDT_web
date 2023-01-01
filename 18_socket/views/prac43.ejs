@@ -179,15 +179,15 @@
         socket.on('newMessage', (data) => {//여기서 data는 {nick: data.myNick, msg: data.msg};
             console.log('socket on newMessage >> ', data);
 
+
             /*<div class = "my-chat">
+
                 <div>user1 : msg1</div>
+                
             </div>
+             */
 
-            <div class = "other-chat">
-                <div>user2 : msg2</div>
-            </div>
 
-            <div class = "notice">xx가 입장했습니다.</div> */
             let chatList = document.querySelector('#chat-list'); //#chat-list 선택
             let div = document.createElement('div'); // .my-chat or .other-chat
             let divChat = document.createElement('div'); //가장 안쪽 div(메세지 가스 )생성

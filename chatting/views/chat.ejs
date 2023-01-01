@@ -8,7 +8,8 @@
 
      <!-- socket.io cdn -->
      <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
-
+     <!-- axios cdn -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
      <style>
         *{
             margin: 0;
@@ -31,18 +32,30 @@
             height: 90%;
             display: flex;
             flex-direction: column;
+            overflow: auto;
         }
         .my-chat{
             display: flex;
+            flex-direction: row-reverse;
             justify-content: end;
+            align-items: end;
         }
         .my-text{
+            border: 3px solid red;
+            margin-right: 10px;
+            margin-left: 3px;
+            margin-top: 5px;
+            width: 50%;
+            text-align: right;
         }
         .my-chat .my-msg p{
+            border: 5px solid green;
             background-color: #8E78FF;
-            color: white;
+            color: black;
             display: inline-block;
             padding: 3px;
+            max-width: 100%;
+            word-break: break-all;
         }
         #my-info{
             display: flex;
@@ -61,8 +74,12 @@
         .other-chat{
             display: flex;
             justify-content: start;
+            align-items: end;
         }
         .other-text{
+            margin-left: 10px;
+            margin-right: 3px;
+            margin-top: 5px;
         }
         .other-chat .other-msg p{
             background-color: white;
@@ -86,7 +103,6 @@
             margin: 0 auto;
         }
         
-        
         .notice{
             text-align: center;
             color: navy;
@@ -94,11 +110,19 @@
         }
         #text{
             margin: 2px 0;
+            display: flex;
+            justify-content: space-around;
         }
         .d-none{
             display: none;
         }
-        
+        .time-div{
+            font-size: 6px;
+        }
+        #imgSend{
+            border: 1px solid black;
+            padding: 0 3px;
+        }
      </style>
 </head>
 <body>
@@ -108,23 +132,32 @@
         <button type = "button" onclick = "entry();">입장</button>
     </div>
 
+
+
     <div class = "chat-box d-none">
+
+        <div class = "userCountNum">
+            <div class = "personNum"></div>
+        </div>
+
         <div id = "chat-list" class = "chat-list">
             <!-- 임시 대화 데이터 -->
             
-        <!-- <div class = "my-chat">
+         <!--  <div class = "my-chat">
                 
-                <div class = "my-text">
-                    <div class = "my-nick"><span>Me</span></div>
-                    <span class = "msg my-msg"><p>msg1</p></span>
-                </div>
-
-                <div id = "my-info">
-                    <img id="my-img" src = "" alt = "1">
-                </div>
+            <div>df</div>
+            <div class = "my-text">
+                <div class = "my-nick"><span>Me</span></div>
+                <span class = "msg my-msg"><p>msg1</p></span>
             </div>
 
-            <div class = "other-chat">
+
+               <div id = "my-info">
+                    <img id="my-img" src = "" alt = "1">
+                </div> 
+            </div>
+
+           <div class = "other-chat">
                 <div id = "other-info">
                     <img id = "other-img" src = "" alt = "2">
                 </div>
@@ -139,18 +172,25 @@
         </div>
 
         <div id = "text">
-            <select id = "nick-list">
-                <option value = "all">전체</option>
-                <option value = "socketId1">nick1</option>
-                <option value = "socketId2">nick2</option>
-            </select>에게
+            <div class = "selectList">
+                <select id = "nick-list">
+                    <!-- <option value = "all">전체</option>
+                    <option value = "socketId1">nick1</option>
+                    <option value = "socketId2">nick2</option> -->
+                </select>에게
+            </div>
 
-            <input type = "text" id = "message">
-            <button type = "button" onclick = "send();">전송</button>
+            <div class = "msgSend">
+                <input type = "text" id = "message">
+                <button type = "button" onclick = "send();">전송</button>
+            </div>
+
+            <input type = "file" name = "dynamicFile" id = "dynamicFile">
         </div>
     </div>
 
     <script>
+        
         let socket = io.connect(); // 소켓 사용을 위한 객체 생성
         let myNick; // 내 닉네임 설정
 
@@ -163,7 +203,8 @@
             console.log('socket.on notice >> ', msg);
 
             //아래코드에서의 ${msg}는 = `${socket.id.slice(0,5)}님이 입장하셨습니다.`);를 의미.
-            //document.querySelector('#chat-list').insertAdjacentElement('beforeend', `<div class = "notice">${msg}</div>`);
+            console.log(document.querySelector('#chat-list'));
+            document.querySelector('.chat-list').insertAdjacentHTML('beforeend', `<div class = "notice">${msg}</div>`);
         });
 
         //실습[44-2] 채팅창 입장 안내 문구 socket.io -> nickname
@@ -186,9 +227,9 @@
 
 
         
-        socket.on('entrySuccess', (nick) => {
+        socket.on('entrySuccess', (nick, userCount) => {
             console.log(nick);
-            myNick = nick; //백으로 받은 nick을 myNick에 저장.
+            myNick = nick; //백으로 받은 nick을 myNick에 저장. // socket.id가 아닌 닉네임이다.
 
             //입장에 성공하면 입장을 제한 -> 비활성화
             document.querySelector('#nickname').disabled = true;
@@ -199,11 +240,15 @@
             //채팅박스 보여줌
             //닉네임이 입력되어야 채팅박스가 보여지도록함
             document.querySelector('.chat-box').classList.remove('d-none');
+
+            document.querySelector('.personNum').innerHTML = `${userCount}명`;
         })
 
 
         //[실습45] 채팅창 메세지 전송 step1
         function send(){
+
+            console.log('전송 버튼 클릭!');
 
             const data = {
                 myNick: myNick, // myNick에는 nick이 들어있다. "entrySuccess" 이벤트에서 입장 성공시 설정한 내 닉네임
@@ -211,9 +256,44 @@
                 dm: document.querySelector('#nick-list').value, // 현재 선택된 select 태그의 option 값 // dm 여부
             }
 
-            console.log('dm >> ', data.dm);
+            console.log('data의 dm 확인 >>>! >> ', data.dm);
 
             socket.emit('send', data); // data 정보를 서버로 보내준다.
+
+
+            // 사진 보내기
+            let img = document.createElement('img');
+            img.setAttribute("width", "200");
+            img.setAttribute("height", "200");
+            img.setAttribute("src", "#");
+            
+            console.log(img);
+
+            const formData = new FormData(); // 폼 객체 생성
+            const file = document.getElementById('dynamicFile'); // file input
+            
+            console.dir(file); //file input
+            console.dir(file.files[0]); //file input에 들어간 파일 정보
+
+            //formData.append(name, value);
+            // - input의 name과 input의 value
+            formData.append('dynamicFile', file.files[0]);
+
+            //axios 통신
+            axios({
+                method: 'POST',
+                url: '/dynamicFile',
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }).then(function(response){
+                console.log(response);
+                console.log(response.data);
+                console.log(response.data.path);
+                img.src = response.data.path;
+                msgSpan.append(img);
+            });
         }
         
         //[실습45] 채팅창 메세지 전송 step2
@@ -221,6 +301,7 @@
         socket.on('newMessage', (data) => { //여기서 data는 {nick: data.myNick, msg: data.msg};
             console.log('socket on newMessage >> ', data);
 
+            
             /*
             <div class = "my-chat"> // chatDiv
                 
@@ -236,6 +317,14 @@
             </div>
             */
 
+            /*  <div class = "my-chat">
+                
+                <div>df</div>
+                <div class = "my-text">
+                    <div class = "my-nick"><span>Me</span></div>
+                    <span class = "msg my-msg"><p>msg1</p></span>
+                </div>*/
+
             let chatList = document.querySelector('#chat-list');
             
             let chatDiv = document.createElement('div');
@@ -244,6 +333,9 @@
             let spanName = document.createElement('span');
             let msgSpan = document.createElement('span');
             let pmsg = document.createElement('p');
+
+            let timeDiv = document.createElement('div');
+        
 
             //새 메세지(data => {nick 'a' msg : 'hello'})가 도착했는데
             //myNick에 저장된 현재 내 닉네임과
@@ -258,7 +350,6 @@
                 textDiv.classList.add('my-text');
                 nickDiv.classList.add('my-nick');
                 msgSpan.classList.add('my-msg');
-                
 
             }else{ //내가 보낸 것과 닉네임이 다르다면 다른 사람이 보낸 채팅.
                 spanName.textContent = spanName.textContent + `${data.nick}`;
@@ -275,8 +366,13 @@
 
             if(data.dm){
                 //data.dm이 있다면
-                div.classList.add('secret-chat'); //css 적용을 위해서
-                pChat.textContent = data.dm; //data.dm = "(속닥속닥)"
+                chatDiv.classList.add('secret-chat'); //css 적용을 위해서
+
+                pmsg.textContent = data.dm; //data.dm = "(속닥속닥)"
+
+                console.log('!!!!!!!!!!!!!!!!!!!!')
+                console.log('내 닉네임: >> ', data.nick);
+                console.log('상대 닉네임 >> ', data.you);
             }
 
             //spanName.textContent = spanName.textContent + `${data.nick}`;
@@ -290,8 +386,38 @@
             nickDiv.append(spanName);
             msgSpan.append(pmsg);
 
+            //pmsg.style.width = "200px";
+            
+
+
+            //[채팅 보낸 시간 표시]
+            let nowTime = new Date();
+        
+            let hours = ('0' + nowTime.getHours()).slice(-2); //시
+            let minutes = ('0' + nowTime.getMinutes()).slice(-2); //분
+
+
+            if(hours > 12){
+                hours = hours - 12; 
+                let printTime = `${hours}:${minutes}`;
+
+                timeDiv.classList.add('time-div');
+                timeDiv.innerHTML = printTime;
+                chatDiv.append(timeDiv);
+            }else{
+                let printTime = `${hours}:${minutes}`;
+
+                timeDiv.classList.add('time-div');
+                timeDiv.innerHTML = printTime;
+                chatDiv.append(timeDiv);
+            }
+            
+
             chatList.scrollTop = chatList.scrollHeight;
         })
+
+
+
 
         //엔터키 치면 채팅문자 등록
         document.getElementById('message').addEventListener('keydown', function(event){
@@ -304,6 +430,41 @@
 
         //[실습46] DM기능 추가 
         //특정 사람에게만 메시지를 보낼 수 있도록 하는 DM 기능.
+        socket.on('updateNicks', (nickArray, userCount) => {
+            console.log('socket on updateNicks >> ', nickArray);
+            console.log('update->socket.id', Object.keys(nickArray)); //객체로 저장됨
+            console.log('update->nick', Object.values(nickArray)); //배열로 저장됨
+            console.log('nickArray.length >> ', Object.keys(nickArray).length);
+
+            //nickArray에 퇴장 입장이 될 때마다 객체가 바뀌고 있다. 이걸 반영해
+            //<option value = 'all'>전체</option>
+            //<option value = socketID1>nick1</option>
+            //<option value = socketID2>nick2</option>
+            //유저 목록 하나하나를 option 태그로 만들어서 select에 추가
+            let option = `<option value = 'all'>전체</option>`;
+            let select = document.querySelector('#nick-list');
+
+            //1. 반복문 사용해 option 태그 하나하나를 완성하기
+            //2. select 태그에 option 태그들을 추가
+
+            for(const nick in nickArray){
+                //socket.in: nick
+                console.log(`${nick}, ${nickArray[nick]}`);
+
+                console.log(`<option value = "${nick}">${nickArray[nick]}</option>`);
+
+                option += `<option value = "${nick}">${nickArray[nick]}</option>`;
+                document.querySelector('#nick-list').innerHTML = option;
+            }
+
+
+            document.querySelector('.personNum').innerHTML = `${userCount}명`;
+            
+        })
+
+        
+
+        
     </script>
 </body>
 </html>

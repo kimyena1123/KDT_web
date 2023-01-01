@@ -132,7 +132,7 @@ INSERT INTO user3(id, pw, name, gender, birthday, age) VALUES ('jungkrat', '4ifh
 -- 실습
 -- 1. 몬든 회원목록을 가져오는데 ,이떄 birthday 컬ㄹ럼의 값을 기준으로 오름차순 정렬
 SELECT * FROM user3 ORDER BY birthday ASC;
--- 2. 회원 목록 중 gender 컬럼의 값이 "M"인 회원목록을 가져오는데, 이때 name 컬럼의 값을 기준으로 내림차순 정렬
+-- 2. 회원 목록 중 gender 컬럼의 값이 "M"인 회원목록을 가져오는데, 이때 name 컬 럼의 값을 기준으로 내림차순 정렬
 SELECT * FROM user3 WHERE gender = 'M' ORDER BY name DESC;
 -- 3. 1990년대에 태어난 회원의 id, name 컬러믕ㄹ 가져와 목록으로 보여주싱
 SELECT id, name FROM user3 WHERE birthday Like '1990%';

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 8000;
+const PORT = 8100;
 
 //multer 설정
 const multer = require('multer');
@@ -99,6 +99,7 @@ app.post('/upload/array', upleadDetail.array('userfiles'), function(req, res){
     console.log(req.body); // 
     res.send('UPLODED Multiple!!');
 });
+
 
 //3. fields(): 여러 파일을 각각의 input에 업로드할 때
 app.post('/upload/fields', upleadDetail.fields([{name: 'userfile1'}, {name: 'userfile2'}]), function(req, res){
