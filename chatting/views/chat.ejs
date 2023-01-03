@@ -10,126 +10,18 @@
      <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
      <!-- axios cdn -->
      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .entry-box{
-            display: flex;
-            justify-content: center;
-        }
-        .chat-box{
-            width: 36%;
-            height: 500px;
-            padding: 10px;
-            margin: 0 auto;
-            border: 2px solid black;
-        }
-        .chat-list{
-            background-color: #E2DCFE;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            overflow: auto;
-        }
-        .my-chat{
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: end;
-            align-items: end;
-        }
-        .my-text{
-            border: 3px solid red;
-            margin-right: 10px;
-            margin-left: 3px;
-            margin-top: 5px;
-            width: 50%;
-            text-align: right;
-        }
-        .my-chat .my-msg p{
-            border: 5px solid green;
-            background-color: #8E78FF;
-            color: black;
-            display: inline-block;
-            padding: 3px;
-            max-width: 100%;
-            word-break: break-all;
-        }
-        #my-info{
-            display: flex;
-        }
-        .my-nick{
-            display: flex;
-            justify-content: end;
-            font-size: 12px;
-        }
-        #my-info #my-img{
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin: 0 auto;
-        }
-        .other-chat{
-            display: flex;
-            justify-content: start;
-            align-items: end;
-        }
-        .other-text{
-            margin-left: 10px;
-            margin-right: 3px;
-            margin-top: 5px;
-        }
-        .other-chat .other-msg p{
-            background-color: white;
-            color: #7f66fd;
-            display: inline-block;
-            padding: 3px;
-        }
-        #other-info{
-            display: flex;
-            flex-direction: column;
-        }
-        .other-nick{
-            display: flex;
-            justify-content: start;
-            font-size: 12px;
-        }
-        #other-info #other-img{
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin: 0 auto;
-        }
-        
-        .notice{
-            text-align: center;
-            color: navy;
-            font-size: 12px;
-        }
-        #text{
-            margin: 2px 0;
-            display: flex;
-            justify-content: space-around;
-        }
-        .d-none{
-            display: none;
-        }
-        .time-div{
-            font-size: 6px;
-        }
-        #imgSend{
-            border: 1px solid black;
-            padding: 0 3px;
-        }
-     </style>
+     <link rel = "stylesheet" href = "../static/css/chat.css">
 </head>
 <body>
     
-    <div class = "entry-box">
-        <input type = "text" id = "nickname" placeholder = "닉네임" autofocus />
-        <button type = "button" onclick = "entry();">입장</button>
+    <div class = "login-box">
+        <div class = "entry-box">
+            <h1>LOGIN</h1>
+            <form>
+                <input type = "text" id = "nickname" placeholder = "닉네임" autofocus autocomplete="off"/>
+                <button type = "button" onclick = "entry();">입장</button>
+            </form>
+        </div>
     </div>
 
 
@@ -185,7 +77,7 @@
                 <button type = "button" onclick = "send();">전송</button>
             </div>
 
-            <input type = "file" name = "dynamicFile" id = "dynamicFile">
+            <!-- <input type = "file" name = "dynamicFile" id = "dynamicFile"> -->
         </div>
     </div>
 
@@ -235,7 +127,10 @@
             document.querySelector('#nickname').disabled = true;
 
             //[입장] 버튼 비활성화
-            document.querySelector('.entry-box > button').disabled = true;
+            //document.querySelector('.entry-box > button').disabled = true;
+            
+            //닉네임 입력하면 로그인 창 사라지게 함
+            document.querySelector('.login-box').classList.add('none');
 
             //채팅박스 보여줌
             //닉네임이 입력되어야 채팅박스가 보여지도록함

@@ -1,0 +1,175 @@
+ *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .login-box{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .entry-box{
+            width: 35%;
+            height: 60%;
+            border: 1px solid black;
+            border-radius: 20px;
+            /*padding-top: 3.1rem;*/
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .entry-box h1{
+            font-size: 3.3rem;
+           /* margin: 5rem 0;*/
+        }
+        .entry-box form{
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin-top: 5rem;
+        }
+        .entry-box input, button{
+            height: 30px;
+            margin: 5px;
+            height: 30px;
+        }
+        .entry-box input{
+            background-color: #eee;
+            padding: 10px 0;
+        }
+        .entry-box input:focus{
+            outline: none;
+        }
+        .entry-box button{
+            background-color: #dfdafe;
+            border: none;
+            border-radius: 7px;
+            height: 35px;
+        }
+        .chat-box{
+            width: 36%;
+            height: 500px;
+            padding: 10px;
+            margin: 0 auto;
+            border: 2px solid black;
+        }
+        .chat-list{
+            background-color: #E2DCFE;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+        .my-chat{
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: end;
+            align-items: end;
+        }
+        .my-text{
+            border: 3px solid red;
+            margin-right: 10px;
+            margin-left: 3px;
+            margin-top: 5px;
+            width: 50%;
+            text-align: right;
+        }
+        .my-chat .my-msg p{
+            border: 5px solid green;
+            background-color: #8E78FF;
+            color: black;
+            display: inline-block;
+            padding: 3px;
+            max-width: 100%;
+            word-break: break-all;
+        }
+        #my-info{
+            display: flex;
+        }
+        .my-nick{
+            display: flex;
+            justify-content: end;
+            font-size: 12px;
+        }
+        #my-info #my-img{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+        }
+        .other-chat{
+            display: flex;
+            justify-content: start;
+            align-items: end;
+        }
+        .other-text{
+            margin-left: 10px;
+            margin-right: 3px;
+            margin-top: 5px;
+        }
+        .other-chat .other-msg p{
+            background-color: white;
+            color: #7f66fd;
+            display: inline-block;
+            padding: 3px;
+        }
+        #other-info{
+            display: flex;
+            flex-direction: column;
+        }
+        .other-nick{
+            display: flex;
+            justify-content: start;
+            font-size: 12px;
+        }
+        #other-info #other-img{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+        }
+        
+        .notice{
+            text-align: center;
+            color: navy;
+            font-size: 12px;
+        }
+        #text{
+            margin: 2px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        .d-none, .none{
+            display: none;
+        }
+        .time-div{
+            font-size: 6px;
+        }
+        #imgSend{
+            border: 1px solid black;
+            padding: 0 3px;
+        }
+
+        @media (max-width: 1600px){
+            .entry-box{
+                width: 55%;  
+            }
+            .entry-box form{
+                margin-top: 0;
+                margin-bottom: 1.2rem;
+            }
+            .entry-box h1{
+                font-size: 2rem;
+                margin: 3rem 0;
+            }
+        }
+
+        @media (max-width: 420px){
+            .entry-box h1{
+                font-size: 3rem;
+                margin: 3rem 0;
+            }
+        }

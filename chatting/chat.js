@@ -6,6 +6,7 @@ const io = require('socket.io')(http); // http-socket 연결
 const PORT = 8000;
 
 //multer 설정
+/*
 const multer = require('multer');
 const path = require('path');
 
@@ -38,9 +39,11 @@ const upleadDetail = multer({
     }),
    // limits:{fileSize: 5 * 1024 * 1024},
 })
+*/
 
 app.set('view engine', 'ejs');
 app.use('/views', express.static(__dirname + '/views'));
+app.use('/static', express.static(__dirname + '/static'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/uploads', express.static(__dirname + '/uploads')); 
@@ -156,12 +159,13 @@ io.on('connection', (socket) => {
     });
 });
 
+/*
 app.post('/dynamicFile',upleadDetail.single('dynamicFile'), function (req, res) {
     console.log(req.file);
     res.send(req.file);
   }
 );
-
+*/
 
 
 // 주의!!!) 소켓을 사용하기 위해서는 http.listen()으로 포트를 열어야 함
