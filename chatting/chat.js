@@ -83,6 +83,7 @@ io.on('connection', (socket) => {
         //닉네임 중복이 있다면
 
         socket.emit('error', '이미 존재하는 닉네임입니다. 다시 시도해주세요');
+
     }else{
         //닉네임 중복이 없다면
         nickArray[socket.id] = nick; //{socket.id: nick}
@@ -126,24 +127,24 @@ io.on('connection', (socket) => {
 
         //전체를 선택하지 않았다면 -> dm
         if(data.dm !== 'all'){ // "전체"가 아니라면 => 특정 유저라면
-            console.log('front에서 받은 dm  확인 >> ', data.dm);
-            console.log('front에서 받은 myNick 확인 >> ', data.myNick);
-            console.log('front에서 받은 menick 확인 >> ', data.menick);
-
-
-
-
             
-            console.log('*****************************')
-            let dmSocketId = data.dm; // 특정 유저의 socket id
-            const sendData = {nick: data.myNick, msg: data.msg, dm: '(속닥속닥)', you: data.dm};
+            //개인 디엠 시 입력값이 빈값이 아니라면
+            if(data.msg !== ''){
+                console.log('*****************************')
+                let dmSocketId = data.dm; // 특정 유저의 socket id
+    
+                console.log('data.dm >> ', data.dm);
+                console.log('socket.id >> ', socket.id);
+    
+                const sendData = {nick: data.myNick, msg: data.msg, dm: '(속닥속닥)', you: data.dm};
+                
+                if(data.dm !== socket.id){/* 자기 자신에게 DM시 한번만 보내기 */
+                    io.to(dmSocketId).emit('newMessage', sendData); // 특정 소켓 아이디에게만 메세지 전송
+                }
+    
+                socket.emit('newMessage', sendData); //자기 자신에게도 dm 메세지 전송
+            }
             
-            
-            io.to(dmSocketId).emit('newMessage', sendData); // 특정 소켓 아이디에게만 메세지 전송
-            socket.emit('newMessage', sendData); //자기 자신에게도 dm 메세지 전송
-            
-
-
         }else{
 
             //전체 메세지 전송
@@ -152,7 +153,6 @@ io.on('connection', (socket) => {
             //data.dm: 특정 유저의 socket id
             if(data.msg !== ''){ // 공백이 아니라면 => 공백일 경우 안보내지도록
                 const sendData = {nick: data.myNick, msg: data.msg};
-                
                 io.emit('newMessage', sendData); // 전체공지 떄린다.
             }
         }

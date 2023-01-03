@@ -49,12 +49,21 @@
             border-radius: 7px;
             height: 35px;
         }
+
+        /*채팅 css*/
+        .chatting{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .chat-box{
             width: 36%;
-            height: 500px;
-            padding: 10px;
+            height: 85%;
+            padding: 10px 0;
             margin: 0 auto;
-            border: 2px solid black;
+            border: 1px solid black; 
         }
         .chat-list{
             background-color: #E2DCFE;
@@ -70,7 +79,7 @@
             align-items: end;
         }
         .my-text{
-            border: 3px solid red;
+            /*border: 3px solid red;*/
             margin-right: 10px;
             margin-left: 3px;
             margin-top: 5px;
@@ -78,7 +87,7 @@
             text-align: right;
         }
         .my-chat .my-msg p{
-            border: 5px solid green;
+            /*border: 5px solid green;*/
             background-color: #8E78FF;
             color: black;
             display: inline-block;
@@ -109,12 +118,16 @@
             margin-left: 10px;
             margin-right: 3px;
             margin-top: 5px;
+            width: 50%;
+            text-align: left;
         }
         .other-chat .other-msg p{
             background-color: white;
             color: #7f66fd;
             display: inline-block;
             padding: 3px;
+            max-width: 100%;
+            word-break: break-all;
         }
         #other-info{
             display: flex;
@@ -131,6 +144,16 @@
             height: 40px;
             margin: 0 auto;
         }
+
+        .my-msg{
+            display: flex; /*timeDiv 위치*/
+            flex-direction: row-reverse;
+            align-items: end;
+        }
+        .other-msg{
+            display: flex;
+            align-items: end;
+        }
         
         .notice{
             text-align: center;
@@ -141,6 +164,8 @@
             margin: 2px 0;
             display: flex;
             justify-content: space-around;
+            align-items: center;
+            background-color: #eee;
         }
         .d-none, .none{
             display: none;
@@ -151,6 +176,11 @@
         #imgSend{
             border: 1px solid black;
             padding: 0 3px;
+        }
+        #sendBtn{
+            width: 45px;
+            border: 10px;
+            background-color: #E2DCFE;
         }
 
         @media (max-width: 1600px){

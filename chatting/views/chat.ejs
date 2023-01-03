@@ -26,58 +26,60 @@
 
 
 
-    <div class = "chat-box d-none">
+    <div class = "chatting">
+        <div class = "chat-box d-none">
 
-        <div class = "userCountNum">
-            <div class = "personNum"></div>
-        </div>
+            <div class = "userCountNum">
+                <div class = "personNum"></div>
+            </div>
 
-        <div id = "chat-list" class = "chat-list">
-            <!-- 임시 대화 데이터 -->
-            
-         <!--  <div class = "my-chat">
+            <div id = "chat-list" class = "chat-list">
+                <!-- 임시 대화 데이터 -->
                 
-            <div>df</div>
-            <div class = "my-text">
-                <div class = "my-nick"><span>Me</span></div>
-                <span class = "msg my-msg"><p>msg1</p></span>
-            </div>
-
-
-               <div id = "my-info">
-                    <img id="my-img" src = "" alt = "1">
-                </div> 
-            </div>
-
-           <div class = "other-chat">
-                <div id = "other-info">
-                    <img id = "other-img" src = "" alt = "2">
+            <!--  <div class = "my-chat">
+                    
+                <div>df</div>
+                <div class = "my-text">
+                    <div class = "my-nick"><span>Me</span></div>
+                    <span class = "msg my-msg"><p>msg1</p></span>
                 </div>
-                
-                <div class= "other-text">
-                    <div class = "other-nick">상대방</div>
-                    <span class = "msg other-msg"><p>msg2</p></span>
+
+
+                <div id = "my-info">
+                        <img id="my-img" src = "" alt = "1">
+                    </div> 
                 </div>
+
+            <div class = "other-chat">
+                    <div id = "other-info">
+                        <img id = "other-img" src = "" alt = "2">
+                    </div>
+                    
+                    <div class= "other-text">
+                        <div class = "other-nick">상대방</div>
+                        <span class = "msg other-msg"><p>msg2</p></span>
+                    </div>
+                </div>
+
+                <div class = "notice">xxx가 입장했습니다.</div> -->
             </div>
 
-            <div class = "notice">xxx가 입장했습니다.</div> -->
-        </div>
+            <div id = "text">
+                <div class = "selectList">
+                    <select id = "nick-list">
+                        <!-- <option value = "all">전체</option>
+                        <option value = "socketId1">nick1</option>
+                        <option value = "socketId2">nick2</option> -->
+                    </select>
+                </div>
 
-        <div id = "text">
-            <div class = "selectList">
-                <select id = "nick-list">
-                    <!-- <option value = "all">전체</option>
-                    <option value = "socketId1">nick1</option>
-                    <option value = "socketId2">nick2</option> -->
-                </select>에게
+                <div class = "msgSend">
+                    <input type = "text" id = "message" autofocus autocomplete="off">
+                    <button id = "sendBtn" type = "button" onclick = "send();">전송</button>
+                </div>
+
+                <!-- <input type = "file" name = "dynamicFile" id = "dynamicFile"> -->
             </div>
-
-            <div class = "msgSend">
-                <input type = "text" id = "message">
-                <button type = "button" onclick = "send();">전송</button>
-            </div>
-
-            <!-- <input type = "file" name = "dynamicFile" id = "dynamicFile"> -->
         </div>
     </div>
 
@@ -142,7 +144,6 @@
 
         //[실습45] 채팅창 메세지 전송 step1
         function send(){
-
             console.log('전송 버튼 클릭!');
 
             const data = {
@@ -154,41 +155,6 @@
             console.log('data의 dm 확인 >>>! >> ', data.dm);
 
             socket.emit('send', data); // data 정보를 서버로 보내준다.
-
-
-            // 사진 보내기
-            let img = document.createElement('img');
-            img.setAttribute("width", "200");
-            img.setAttribute("height", "200");
-            img.setAttribute("src", "#");
-            
-            console.log(img);
-
-            const formData = new FormData(); // 폼 객체 생성
-            const file = document.getElementById('dynamicFile'); // file input
-            
-            console.dir(file); //file input
-            console.dir(file.files[0]); //file input에 들어간 파일 정보
-
-            //formData.append(name, value);
-            // - input의 name과 input의 value
-            formData.append('dynamicFile', file.files[0]);
-
-            //axios 통신
-            axios({
-                method: 'POST',
-                url: '/dynamicFile',
-                data: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            }).then(function(response){
-                console.log(response);
-                console.log(response.data);
-                console.log(response.data.path);
-                img.src = response.data.path;
-                msgSpan.append(img);
-            });
         }
         
         //[실습45] 채팅창 메세지 전송 step2
@@ -298,13 +264,13 @@
 
                 timeDiv.classList.add('time-div');
                 timeDiv.innerHTML = printTime;
-                chatDiv.append(timeDiv);
+                msgSpan.append(timeDiv);
             }else{
                 let printTime = `${hours}:${minutes}`;
 
                 timeDiv.classList.add('time-div');
                 timeDiv.innerHTML = printTime;
-                chatDiv.append(timeDiv);
+                msgSpan.append(timeDiv);
             }
             
 
